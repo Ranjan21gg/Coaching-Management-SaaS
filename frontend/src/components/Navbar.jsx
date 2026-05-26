@@ -17,7 +17,7 @@ import {
 export default function Navbar() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate();
-  const isLoggedIn = !localStorage.getItem("access"); // ✅ FIXED
+  const isLoggedIn = !!localStorage.getItem("access"); // ✅ FIXED
 
   const [isDark, setIsDark] = useState(false);
 
