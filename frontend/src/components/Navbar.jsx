@@ -36,6 +36,9 @@ export default function Navbar() {
     setIsDark(isDarkNow);
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
@@ -49,72 +52,89 @@ export default function Navbar() {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-0 text-sm md:text-base">
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden p-2"
+        >
+          ☰
+        </button>
 
-          {isLoggedIn && (
-            <>
-              <Link to="/dashboard" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <LayoutDashboard size={18} /> Dashboard
-              </Link>
+        {/* Menu */}
+        <div
+          className={`${menuOpen ? "flex" : "hidden"
+            } md:flex flex-col md:flex-row absolute md:static top-16 left-0 w-full md:w-auto bg-indigo-700 md:bg-transparent p-4 md:p-0 gap-2 md:items-center`}
+        >
 
-              <Link to="/students" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <Users size={18} /> Students
-              </Link>
+          <div className="flex flex-wrap items-center gap-0 text-sm md:text-base">
 
-              <Link to="/attendance" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <CalendarCheck size={18} /> Attendance
-              </Link>
+            {isLoggedIn && (
+              <>
+                <Link to="/dashboard" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <LayoutDashboard size={18} /> Dashboard
+                </Link>
 
-              <Link to="/fees" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <Wallet size={18} /> Fees
-              </Link>
+                <Link to="/students" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <Users size={18} /> Students
+                </Link>
 
+                <Link to="/attendance" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <CalendarCheck size={18} /> Attendance
+                </Link>
 
-              <Link to="/add-student" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <UserRoundPlus size={18} /> Add Student
-              </Link>
+                <Link to="/fees" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <Wallet size={18} /> Fees
+                </Link>
 
+                <Link to="/add-student" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <UserRoundPlus size={18} /> Add Student
+                </Link>
 
-              <button
-                onClick={() => {
-                  localStorage.removeItem("access"); // ✅ FIXED
-                  navigate("/");
-                }}
-                className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm"
-              >
-                <LogOut size={18} /> Logout
+                <button
+                  onClick={() => {
+                    localStorage.removeItem("access"); // ✅ FIXED
+                    onClick = { closeMenu }
+                    navigate("/");
+                  }}
+                  className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm"
+                >
+                  <LogOut size={18} /> Logout
+                </button>
+              </>
+            )}
+
+            {!isLoggedIn && (
+              <>
+                <Link to="/register" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <UserPlus size={18} /> Register
+                </Link>
+
+                <Link to="/" onClick={closeMenu} className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
+                  <LogIn size={18} /> Login
+                </Link>
+              </>
+            )}
+
+            {!isSubscribed && (
+              <button onClick={() => navigate("/subscribe")}
+                onClick={closeMenu}
+                className="flex items-center gap-0 bg-yellow-500 text-black ml-2 mr-2 px-1 py-2 rounded-lg text-xs rounded-lg hover:bg-white hover:text-blue-700">
+                <Crown size={18} />
+                Premium Plan
               </button>
-            </>
-          )}
+            )}
 
-          {!isLoggedIn && (
-            <>
-              <Link to="/register" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <UserPlus size={18} /> Register
-              </Link>
-
-              <Link to="/" className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                <LogIn size={18} /> Login
-              </Link>
-            </>
-          )}
-
-          {!isSubscribed && (
-            <button onClick={() => navigate("/subscribe")}
-              className="flex items-center gap-0 bg-yellow-500 text-black ml-2 mr-2 px-1 py-2 rounded-lg text-xs rounded-lg hover:bg-white hover:text-blue-700">
-              <Crown size={18} />
-              Premium Plan
+            <button
+              onClick={handleToggle}
+              onClick={closeMenu}
+              className="p-2 rounded-lg bg-gray-700 dark:bg-gray-600"
+            >
+              {!isDark ? <Sun size={18} className="text-yellow-400 drop-shadow-md" /> : <Moon size={18} className="text-blue-300 drop-shadow-md" />}
             </button>
-          )}
-
-          <button
-            onClick={handleToggle}
-            className="p-2 rounded-lg bg-gray-700 dark:bg-gray-600"
-          >
-            {!isDark ? <Sun size={18} className="text-yellow-400 drop-shadow-md" /> : <Moon size={18} className="text-blue-300 drop-shadow-md" />}
-          </button>
+          </div>
 
         </div>
+
       </div>
     </nav>
   );

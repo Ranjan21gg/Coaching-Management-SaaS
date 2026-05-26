@@ -114,7 +114,7 @@ export default function Attendance() {
 
             {/* Button (same size preserved) */}
             <button
-              className={`text-white   dark:text-black  text-sm font-medium rounded-lg shadow-md transition duration-300 ${editingId
+              className={`text-white py-2  dark:text-black  text-sm font-medium rounded-lg shadow-md transition duration-300 ${editingId
                 ? "bg-yellow-500 hover:bg-yellow-600"
                 : "bg-blue-500 hover:bg-blue-600"
                 }`}
