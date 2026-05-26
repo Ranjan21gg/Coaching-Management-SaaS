@@ -41,8 +41,12 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
 
         <div>
-          <h1 className="text-2xl font-bold tracking-wide">Coaching</h1>
-          <span className="text-yellow-300">Management</span>
+          <h1 className="text-2xl font-black tracking-tight">
+            Insti<span className="text-yellow-400">Flow</span>
+          </h1>
+          <p className="text-xs text-gray-400">
+            Smart Coaching Management
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-0 text-sm md:text-base">
