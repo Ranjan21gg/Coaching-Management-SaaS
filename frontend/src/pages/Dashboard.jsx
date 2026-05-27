@@ -74,7 +74,7 @@ export default function Dashboard() {
   return (
     //"bg-white text-black dark:bg-gray-900 dark:text-white"
 
-    <div className="p-6 bg-gray-900  dark:bg-white  min-h-screen text-white  dark:text-black">
+    <div className="p-6 bg-gray-900  dark:bg-blue-200  min-h-screen text-white  dark:text-black">
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

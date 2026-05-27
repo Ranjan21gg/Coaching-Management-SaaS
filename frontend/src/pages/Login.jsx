@@ -46,15 +46,15 @@ export default function Login() {
   };
 
   return (
-    <div className="min-height:40vh bg-gray-900 flex items-center justify-center px-4 mt-8">
-      <div className="w-full max-w-sm bg-gray-800 p-8 rounded-2xl shadow-lg border border-gray-700">
+    <div className="min-height:40vh bg-gray-900 dark:bg-blue-200 flex items-center justify-center p-8">
+      <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-semibold text-white tracking-wide">
+          <h1 className="text-3xl font-semibold text-white dark:text-black tracking-wide">
             Login
           </h1>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-400 dark:text-black text-sm mt-1">
             Welcome back, please login
           </p>
         </div>
@@ -70,7 +70,7 @@ export default function Login() {
               type="text"
               placeholder="Institute Name"
               autoComplete="current-institute_name"
-              className="w-full bg-gray-700 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, institute_name: e.target.value })}
             />
 
@@ -79,7 +79,7 @@ export default function Login() {
               type="text"
               placeholder="Username"
               autoComplete="current-username"
-              className="w-full bg-gray-700 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
 
@@ -87,7 +87,7 @@ export default function Login() {
               type="password"
               placeholder="Password"
               autoComplete="current-password"
-              className="w-full bg-gray-700 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
 

@@ -34,11 +34,11 @@ export default function StudentProfile() {
   const totalDue = fees.reduce((sum, f) => sum + (f.total_fee - f.paid_fee), 0);
 
   return (
-    <div className="min-h-screen bg-slate-900 p-6 text-white">
+    <div className="min-h-screen bg-slate-900 p-6 text-white dark:text-black dark:bg-blue-200">
       <div className="max-w-4xl mx-auto space-y-6">
 
         {/* Profile */}
-        <div className="bg-white/10 p-6 rounded-xl">
+        <div className="bg-white/10 p-6 rounded-xl  dark:bg-white dark:border-2 border-blue-500 p-6 rounded-xl shadow hover:shadow-xl transition">
           <div className="flex justify-between">
             <h1 className="text-2xl font-bold">{student.name}</h1>
             <button onClick={() => navigate("/students")} className="bg-gray-600 px-3 py-1 rounded">
@@ -52,7 +52,7 @@ export default function StudentProfile() {
         </div>
 
         {/* Fees */}
-        <div className="bg-white/10 p-6 rounded-xl">
+        <div className="bg-white/10 p-6 rounded-xl dark:bg-white dark:border-2 border-blue-500  p-6 rounded-xl shadow hover:shadow-xl transition">
           <h2 className="text-xl font-bold mb-4">Fees</h2>
 
           <p className="mb-3 text-yellow-400">
@@ -71,7 +71,7 @@ export default function StudentProfile() {
         </div>
 
         {/* Attendance */}
-        <div className="bg-white/10 p-6 rounded-xl">
+        <div className="bg-white/10 p-6 rounded-xl dark:bg-white dark:bg-white/6 dark:border-2 border-blue-500  p-6 rounded-xl shadow hover:shadow-xl transition">
           <h2 className="text-xl font-bold mb-4">Attendance</h2>
 
           {attendance.map((a) => (

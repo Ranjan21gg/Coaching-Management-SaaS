@@ -60,7 +60,7 @@ export default function Fees() {
   return (
     //"bg-white text-black dark:bg-gray-900 dark:text-white"
 
-    <div className="min-h-screen bg-gray-900  dark:bg-white  p-6">
+    <div className="min-h-screen bg-gray-900  dark:bg-blue-200  p-6">
       <div className="max-w-6xl mx-auto">
 
         {/* Header */}

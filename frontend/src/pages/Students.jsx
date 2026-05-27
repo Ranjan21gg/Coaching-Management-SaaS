@@ -15,19 +15,7 @@ export default function Students() {
 
 
   return (
-    // <div className="p-6">
-    //   <h1 className="text-2xl font-bold mb-4">Students</h1>
-
-    //   {students.map((s) => (
-    //     <div key={s.id} className="border p-2 my-2">
-    //       {s.name} - {s.course} - {s.phone} - {s.joined_date}
-    //     </div>
-    //   ))}
-    // </div>
-
-    // "bg-white text-black dark:bg-gray-900 dark:text-white"
-
-    <div className="p-6 min-h-screen bg-gray-900  dark:bg-white">
+    <div className="p-6 min-h-screen bg-gray-900  dark:bg-blue-200">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
@@ -56,7 +44,7 @@ export default function Students() {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold">
+                <h2 className="text-xl dark:text-black font-semibold">
                   {s.name}
                 </h2>
                 <p className="text-gray-400  dark:text-black  text-sm">

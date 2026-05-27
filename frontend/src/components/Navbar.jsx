@@ -21,6 +21,11 @@ export default function Navbar() {
 
   const [isDark, setIsDark] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem("theme");
 
@@ -91,11 +96,7 @@ export default function Navbar() {
                 </Link>
 
                 <button
-                  onClick={() => {
-                    localStorage.removeItem("access"); // ✅ FIXED
-                    onClick = { closeMenu }
-                    navigate("/");
-                  }}
+                  onClick={handleLogout}
                   className="flex items-center gap-1 px-4 py-2 rounded-lg hover:bg-white hover:text-blue-700 text-sm"
                 >
                   <LogOut size={18} /> Logout
@@ -125,11 +126,13 @@ export default function Navbar() {
             )}
 
             <button
-              onClick={handleToggle}
-              onClick={closeMenu}
-              className="p-2 rounded-lg bg-gray-700 dark:bg-gray-600"
+              onClick={() => {
+                handleToggle();
+                closeMenu();
+              }}
+              className="px-4 py-2 rounded-lg"
             >
-              {!isDark ? <Sun size={18} className="text-yellow-400 drop-shadow-md" /> : <Moon size={18} className="text-blue-300 drop-shadow-md" />}
+              {!isDark ? <Sun size={24} className="text-yellow-400 drop-shadow-md" /> : <Moon size={24} className="text-blue-300 drop-shadow-md" />}
             </button>
           </div>
 
