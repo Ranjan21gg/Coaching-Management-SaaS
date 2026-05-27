@@ -19,7 +19,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await API.post("login/", data);
+      const res = await API.post("api/login/", data);
       if (!res.data.access) {
         throw new Error("No access token received");
       }
