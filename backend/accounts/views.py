@@ -5,6 +5,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.utils.text import slugify
+
 
 # from django.http import HttpResponse
 # from django.views.decorators.csrf import csrf_exempt
@@ -21,7 +23,7 @@ from .models import Tenant, Membership
 def register(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    institute_name = request.data.get('slug')
+    institute_name = request.data.get('institute_name')
 
     if not username or not password or not institute_name:
         return Response({"error": "All fields required"}, status=400)
@@ -31,12 +33,17 @@ def register(request):
         username=username,
         password=password
     )
+
+    # slug generation
+    slug = slugify(institute_name)
     
-    # create tenant (coaching)
-    tenant = Tenant.objects.create(
-        name=institute_name,
-        slug=institute_name.replace(" ", "-"),
-        owner=user
+    # tenant generation (no duplicates)
+    tenant, _ = Tenant.objects.get_or_create(
+        slug=slug,
+        defaults={
+            "name": institute_name,
+            "owner": user
+        }
     )
     
     # link user to tenant
@@ -55,10 +62,13 @@ def register(request):
 def login(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    slug = request.data.get('slug')  # instead of institute_name
+    institute_name = request.data.get('institute_name')  # instead of institute_name
 
-    if not username or not password or not slug:
+    if not username or not password or not institute_name:
         return Response({"error": "All fields required"}, status=400)
+    
+     # generate slug
+    slug = slugify(institute_name)
 
     user = authenticate(
         username=username,
