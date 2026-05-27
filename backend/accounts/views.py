@@ -21,9 +21,9 @@ from .models import Tenant, Membership
 def register(request):
     username = request.data.get('username')
     password = request.data.get('password')
-    institute_name = request.data.get('institute_name')
+    slug = request.data.get('slug')
 
-    if not username or not password or not institute_name:
+    if not username or not password or not slug:
         return Response({"error": "All fields required"}, status=400)
 
     # create user
@@ -34,8 +34,8 @@ def register(request):
     
     # create tenant (coaching)
     tenant = Tenant.objects.create(
-        name=institute_name,
-        slug=institute_name.replace(" ", "-"),
+        name=slug,
+        slug=slug.replace(" ", "-"),
         owner=user
     )
     
