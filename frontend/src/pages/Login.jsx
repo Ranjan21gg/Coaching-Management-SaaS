@@ -71,7 +71,7 @@ export default function Login() {
               placeholder="Institute Name"
               autoComplete="current-institute_name"
               className="w-full bg-gray-700 text-white placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onChange={(e) => setData({ ...data, slug: e.target.value })}
+              onChange={(e) => setData({ ...data, institute_name: e.target.value })}
             />
 
 
