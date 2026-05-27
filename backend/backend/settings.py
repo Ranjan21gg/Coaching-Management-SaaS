@@ -71,6 +71,10 @@ MIDDLEWARE = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://instiflow-three.vercel.app",
+]
+
 from datetime import timedelta
 
 RAZORPAY_KEY_ID = "rzp_test_1a2b3c4d5e"
