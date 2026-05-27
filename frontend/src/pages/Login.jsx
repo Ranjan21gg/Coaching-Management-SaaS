@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [data, setData] = useState({ 
-    slug:"",
     username: "",
-    password: "" });
+    password: "",
+    slug: ""
+  });
     
   const navigate = useNavigate();
 
