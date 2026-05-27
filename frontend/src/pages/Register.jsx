@@ -20,7 +20,7 @@ export default function Register() {
     setMessage("");
 
     try {
-      await API.post("api/register/", data);
+      await API.post("/register/", data);
       setMessage("Registration successful");
       setisError(false)
 
