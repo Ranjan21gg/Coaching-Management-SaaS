@@ -46,8 +46,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-height:40vh bg-gray-900 dark:bg-blue-200 flex items-center justify-center p-8">
-      <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
+    <div className="p-10 pb-56 bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
+      <div className="w-full mb-18 max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
 
         {/* Header */}
         <div className="text-center mb-6">
