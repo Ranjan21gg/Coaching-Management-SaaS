@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-class TenantJWTAuthentication(JWTAuthentication):
+class InstituteJWTAuthentication(JWTAuthentication):
 
     def authenticate(self, request):
         result = super().authenticate(request)
@@ -10,7 +10,7 @@ class TenantJWTAuthentication(JWTAuthentication):
 
         user, token = result
 
-        request.tenant_id = token.get("tenant_id")
+        request.institute_id = token.get("institute_id")
         request.role = token.get("role")
 
         return (user, token)

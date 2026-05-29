@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 # students/views.py
 
-from rest_framework.response import Response
+# from rest_framework.response import Response
 # from accounts.utils import get_tenant, has_active_subscription
 
 from rest_framework.viewsets import ModelViewSet
@@ -20,12 +20,12 @@ class StudentViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Student.objects.filter(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
 
     def perform_create(self, serializer):
         serializer.save(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
 
     # def create(self, request, *args, **kwargs):
@@ -38,8 +38,8 @@ class StudentViewSet(ModelViewSet):
 from rest_framework.viewsets import ModelViewSet
 from .models import Student
 from .serializers import StudentSerializer
-from backend.mixins import TenantQuerySetMixin
+from backend.mixins import InstituteQuerySetMixin
 
-class StudentViewSet(TenantQuerySetMixin, ModelViewSet):
+class StudentViewSet(InstituteQuerySetMixin, ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

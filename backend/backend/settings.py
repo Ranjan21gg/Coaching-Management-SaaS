@@ -82,7 +82,7 @@ RAZORPAY_KEY_SECRET = "kJshd73jshd83hshd..."
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'backend.authentication.TenantJWTAuthentication',
+        'backend.authentication.InstituteJWTAuthentication',
     ),
 
     'DEFAULT_PERMISSION_CLASSES': (

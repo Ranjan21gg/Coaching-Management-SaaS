@@ -9,7 +9,7 @@ class FeeViewSet(ModelViewSet):
 
     def get_queryset(self):
         queryset = Fee.objects.filter(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
         student_id = self.request.query_params.get("student")
 
@@ -20,5 +20,5 @@ class FeeViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )

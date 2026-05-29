@@ -1,6 +1,6 @@
-class TenantQuerySetMixin:
+class InstituteQuerySetMixin:
     def get_queryset(self):
-        return self.queryset.filter(tenant_id=self.request.tenant_id)
+        return self.queryset.filter(institute_id=self.request.institute_id)
 
     def perform_create(self, serializer):
-        serializer.save(tenant_id=self.request.tenant_id)
+        serializer.save(institute_id=self.request.institute_id)

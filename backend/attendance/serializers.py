@@ -4,4 +4,4 @@ from .models import Attendance
 class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
-        exclude = ['tenant']
+        exclude = ['institute']

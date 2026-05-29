@@ -12,7 +12,7 @@ from django.utils.text import slugify
 # from django.views.decorators.csrf import csrf_exempt
 # import json
 
-from .models import Tenant, Membership
+from .models import Institute, Membership
 # from .models import Subscription
 # from .utils import client
 
@@ -38,7 +38,7 @@ def register(request):
     slug = slugify(institute_name)
     
     # tenant generation (no duplicates)
-    tenant, _ = Tenant.objects.get_or_create(
+    institute, created = Institute.objects.get_or_create(
         slug=slug,
         defaults={
             "name": institute_name,
@@ -49,11 +49,11 @@ def register(request):
     # link user to tenant
     Membership.objects.create(
         user=user,
-        tenant=tenant,
+        institute=institute,
         role='admin'
     )
 
-    return Response({"msg": "User + Tenant created Successfully"})
+    return Response({"msg": "User + Institute created Successfully"})
 
 
 
@@ -70,6 +70,13 @@ def login(request):
      # generate slug
     slug = slugify(institute_name)
 
+    # Find institute safely
+    try:
+        institute = Institute.objects.get(slug=slug)
+    except Institute.DoesNotExist:
+        return Response({"error": "Institute not found"},status=404)
+    
+    # Authenticate user
     user = authenticate(
         username=username,
         password=password
@@ -77,19 +84,21 @@ def login(request):
 
     if not user:
         return Response({"error": "Invalid credentials"}, status=401)
-
+    
+    # Verify membership
     try:
-        membership = Membership.objects.select_related('tenant').get(
+        membership = Membership.objects.select_related('institute').get(
             user=user,
-            tenant__slug=slug
+            institute=institute
         )
     except Membership.DoesNotExist:
-        return Response({"error": "Access denied for this institute"}, status=403)
-
+        return Response({"error": "Access denied for this institute"},status=403)
+    
+    # Generate JWT
     refresh = RefreshToken.for_user(user)
 
     # 🔥 ADD CUSTOM CLAIMS
-    refresh['tenant_id'] = membership.tenant.id
+    refresh['institute_id'] = membership.institute.id
     refresh['role'] = membership.role
     
 
@@ -97,7 +106,13 @@ def login(request):
         "access": str(refresh.access_token),
         "refresh": str(refresh),
         "role": membership.role,
-        "tenant": membership.tenant.name
+        "institute": membership.institute.name,
+
+        # REAL DISPLAY NAME
+        "institute": institute.name,
+
+        # optional
+        "username": user.username
     })
 
 

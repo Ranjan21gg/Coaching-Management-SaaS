@@ -18,17 +18,17 @@ class AttendanceViewSet(ModelViewSet):
 
     def get_queryset(self):
         return Attendance.objects.filter(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
 
     def perform_create(self, serializer):
         serializer.save(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
 
     def perform_update(self, serializer):
         serializer.save(
-            tenant_id=self.request.tenant_id
+            institute_id=self.request.institute_id
         )
 
     # def get_object(self):
