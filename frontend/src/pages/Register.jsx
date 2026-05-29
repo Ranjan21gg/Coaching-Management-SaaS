@@ -37,7 +37,7 @@ export default function Register() {
   };
 
   return (
-    <div className="p-10 pt-24 pb-64 bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
       <div className="w-full mb-18 max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
 
         {/* Header */}

@@ -3,50 +3,107 @@ import API from "../api";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [data, setData] = useState({ 
+  const [data, setData] = useState({
     institute_name: "",
     username: "",
     password: "",
   });
-    
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("")
   const [isError, setisError] = useState(false);
 
+  // const login = async (e) => {
+  //   setLoading(true);
+  //   e.preventDefault();
+
+  //   try {
+  //     const res = await API.post("/login/", data);
+
+  //     if (!res.data.access) {
+  //       throw new Error("No access token received");
+  //     }
+  //     localStorage.setItem("access", res.data.access);
+
+  //     // only store refresh if exists
+  //     if (res.data.refresh) {
+  //       localStorage.setItem("refresh", res.data.refresh);
+  //     }
+  //     setMessage("Login successful")
+  //     setisError(false);
+
+  //     setTimeout(() => {
+  //       navigate("/dashboard")
+  //     }, 1000);
+
+  //   } catch (err) {
+  //     setMessage("Login unsuccessful")
+  //     console.error("LOGIN ERROR:", err.response?.data || err.message);
+  //   }
+  //   setLoading(false);
+  //   setisError(true);
+  // };
+
+
   const login = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
 
     try {
+      // LOGIN API CALL
       const res = await API.post("/login/", data);
-      if (!res.data.access) {
+
+      // RESPONSE DATA
+      const userData = res.data;
+
+      // CHECK TOKEN EXISTS
+      if (!userData.access) {
         throw new Error("No access token received");
       }
-      localStorage.setItem("access", res.data.access);
 
-      // only store refresh if exists
-      if (res.data.refresh) {
-        localStorage.setItem("refresh", res.data.refresh);
+      // STORE ACCESS TOKEN
+      localStorage.setItem("access", userData.access);
+
+      // STORE REFRESH TOKEN
+      if (userData.refresh) {
+        localStorage.setItem("refresh", userData.refresh);
       }
-      setMessage("Login successful")
+
+      // STORE COMPLETE USER DATA
+      localStorage.setItem("user", JSON.stringify(userData));
+
+      /*
+        Stored data example:
+        {
+          access: "...",
+          refresh: "...",
+          role: "admin",
+          institute: "EKALAVYA PATHSALA",
+          username: "admin"
+        }
+      */
+
+      // SUCCESS MESSAGE
+      setMessage("Login successful");
       setisError(false);
 
+      // REDIRECT
       setTimeout(() => {
-        navigate("/dashboard")
+        navigate("/dashboard");
       }, 1000);
 
     } catch (err) {
-      setMessage("Login unsuccessful")
       console.error("LOGIN ERROR:", err.response?.data || err.message);
+      setMessage("Login unsuccessful");
+      setisError(true);
     }
     setLoading(false);
-    setisError(true);
   };
 
+
   return (
-    <div className="p-10 pt-24 pb-64 bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
       <div className="w-full mb-18 max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
 
         {/* Header */}
@@ -99,7 +156,7 @@ export default function Login() {
             </button>
 
             {message && (
-              <p className={`text-center text-sm mt-2 font-medium ${isError ? "text-green-400" : "text-red-400"}`}>
+              <p className={`text-center text-sm mt-2 font-medium ${isError ? "text-red-400" : "text-green-400"}`}>
                 {message}
               </p>
             )}
