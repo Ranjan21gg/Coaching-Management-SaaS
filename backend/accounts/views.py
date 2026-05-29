@@ -67,7 +67,7 @@ def login(request):
     if not username or not password or not institute_name:
         return Response({"error": "All fields required"}, status=400)
     
-     # generate slug
+    # generate slug
     slug = slugify(institute_name)
 
     # Find institute safely
@@ -89,7 +89,7 @@ def login(request):
     try:
         membership = Membership.objects.select_related('institute').get(
             user=user,
-            institute=slug
+            institute__slug=slug
         )
     except Membership.DoesNotExist:
         return Response({"error": "Access denied for this institute"},status=403)
