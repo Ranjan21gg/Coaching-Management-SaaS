@@ -89,7 +89,7 @@ def login(request):
     try:
         membership = Membership.objects.select_related('institute').get(
             user=user,
-            institute=institute
+            institute=slug
         )
     except Membership.DoesNotExist:
         return Response({"error": "Access denied for this institute"},status=403)
