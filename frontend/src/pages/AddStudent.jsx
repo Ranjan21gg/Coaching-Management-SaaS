@@ -18,7 +18,7 @@ export default function AddStudent() {
 
   
   return (
-      <div className="min-h-screen bg-gray-900 flex items-center justify-center p-16 px-4 dark:bg-blue-200">
+      <div className="min-h-screen pb-28 bg-gray-900 flex items-center justify-center p-16 px-4 dark:bg-blue-200">
         <div className="w-full max-w-md bg-gray-800  dark:bg-white  shadow rounded-2xl p-10 border border-gray-700">
 
           {/* Header */}

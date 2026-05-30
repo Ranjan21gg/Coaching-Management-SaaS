@@ -38,7 +38,7 @@ def register(request):
     slug = slugify(institute_name)
     
     # tenant generation (no duplicates)
-    institute, created = Institute.objects.get_or_create(
+    institute, _ = Institute.objects.get_or_create(
         slug=slug,
         defaults={
             "name": institute_name,

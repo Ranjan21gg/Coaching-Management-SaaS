@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 import {
+  Menu,
   UserPlus,
   LogIn,
   LogOut,
@@ -49,23 +51,22 @@ export default function Navbar() {
 
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 py-1 gap-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-2 gap-14 flex items-center justify-between">
 
-        <div>
-          <h1 className="text-2xl font-black tracking-tight">
-            Insti<span className="text-yellow-400">Flow</span>
-          </h1>
-          <p className="text-xs text-gray-400">
-            Smart Coaching Management
-          </p>
+        <div className="flex items-center">
+          <img
+            src={logo}
+            alt="InstiFlow"
+            className="h-8 w-24 md:h-14 w-auto object-contain"
+          />
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden p-2"
+          className="p-2 md:hidden"
         >
-          ☰
+          <Menu size={24} />
         </button>
 
         {/* Menu */}
@@ -73,35 +74,33 @@ export default function Navbar() {
           className={`${menuOpen ? "flex" : "hidden"
             } md:flex flex-col md:flex-row fixed md:static z-50 top-16 left-0 w-full md:w-auto bg-indigo-800/95 md:bg-transparent p-4 md:p-0 gap-4 md:items-center md:justify-end`}
         >
-
-          {/* User Card */}
+          {/* Mobile Menu User Card */}
           {isLoggedIn && user && (
-            <div className="flex items-center gap-2 bg-white/10 px-2 py-0 rounded-2xl border border-white/20">
+            <div className="flex items-center gap-2 bg-white/10 px-2 py-1 rounded-xl border border-white/20">
 
-              {/* Profile Circle */}
-              <div className="w-6 h-6 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold text-sm shadow-md">
+              {/* Avatar */}
+              <div className="w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold text-sm">
                 {user.username?.charAt(0).toUpperCase()}
               </div>
 
-              {/* User Details */}
+              {/* Info */}
               <div className="flex flex-col leading-tight">
-                <h1 className="text-sm font-bold uppercase tracking-wide text-white  max-w-[120px] truncate">
+                <h1 className="text-sm font-bold uppercase tracking-wide text-white">
                   {user.institute}
                 </h1>
 
-                <div className="flex items-center gap-2">
-                  <p className="text-xs font-semibold pb-1 text-white">
+                <div className="flex items-center gap-1">
+                  <p className="text-[10px] font-semibold text-gray-200">
                     {user.username}
                   </p>
 
-                  <span className="text-[10px] bg-yellow-400 text-black px-2 py-[1px] rounded-full font-semibold capitalize">
+                  <span className="text-[9px] bg-yellow-400 text-black px-1 rounded-full font-semibold capitalize">
                     {user.role}
                   </span>
                 </div>
               </div>
             </div>
           )}
-
 
           <div className="flex flex-wrap items-center justify-end gap-1 text-sm md:text-base">
 
