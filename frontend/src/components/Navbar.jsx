@@ -51,7 +51,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 py-2 gap-14 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-1 gap-24 flex items-center justify-between">
 
         <div className="flex items-center">
           <img
@@ -72,35 +72,38 @@ export default function Navbar() {
         {/* Menu */}
         <div
           className={`${menuOpen ? "flex" : "hidden"
-            } md:flex flex-col md:flex-row fixed md:static z-50 top-16 left-0 w-full md:w-auto bg-indigo-800/95 md:bg-transparent p-4 md:p-0 gap-4 md:items-center md:justify-end`}
+            } md:flex flex-col md:flex-row fixed md:static z-50 top-12 left-0 w-full md:w-auto bg-indigo-800/95 md:bg-transparent p-4 md:p-0 gap-4 md:items-center md:justify-end`}
         >
-          {/* Mobile Menu User Card */}
-          {isLoggedIn && user && (
-            <div className="flex items-center gap-2 bg-white/10 px-2 py-1 rounded-xl border border-white/20">
 
-              {/* Avatar */}
-              <div className="w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold text-sm">
-                {user.username?.charAt(0).toUpperCase()}
-              </div>
+          <div>
+            {/*User Card */}
+            {isLoggedIn && user && (
+              <div className="flex items-center gap-2 bg-white/10 px-2 py-1 rounded-xl border border-white/20">
 
-              {/* Info */}
-              <div className="flex flex-col leading-tight">
-                <h1 className="text-sm font-bold uppercase tracking-wide text-white">
-                  {user.institute}
-                </h1>
+                {/* Avatar */}
+                <div className="w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center font-bold text-sm">
+                  {user.username?.charAt(0).toUpperCase()}
+                </div>
 
-                <div className="flex items-center gap-1">
-                  <p className="text-[10px] font-semibold text-gray-200">
-                    {user.username}
-                  </p>
+                {/* Info */}
+                <div className="flex flex-col leading-tight">
+                  <h1 className="text-sm font-bold uppercase tracking-wide text-white">
+                    {user.institute}
+                  </h1>
 
-                  <span className="text-[9px] bg-yellow-400 text-black px-1 rounded-full font-semibold capitalize">
-                    {user.role}
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <p className="text-[10px] font-semibold text-gray-200">
+                      {user.username}
+                    </p>
+
+                    <span className="text-[9px] bg-yellow-400 text-black px-1 rounded-full font-semibold capitalize">
+                      {user.role}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           <div className="flex flex-wrap items-center justify-end gap-1 text-sm md:text-base">
 
