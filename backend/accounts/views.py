@@ -28,6 +28,13 @@ def register(request):
     if not username or not password or not institute_name:
         return Response({"error": "All fields required"}, status=400)
 
+    # uniqe constraints check
+    if User.objects.filter(username=username).exists():
+       return Response(
+           {"error": "Username already exists"},
+           tatus=400
+           )
+
     # create user
     user = User.objects.create_user(
         username=username,
