@@ -39,7 +39,7 @@
   :root {
     --text: #9ca3af;
     --text-h: #f3f4f6;
-    --bg: #111827; /* Tailwind gray-900 */
+    --bg: #111827;  /* Tailwind gray-900 */
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -55,14 +55,24 @@
   }
 }
 
-body {
+/* body {
   margin: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
+} */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  overflow: auto;
 }
 
 html {
   transition: background-color 0.3s, color 0.3s;
 }
+
+
+
 
 /* #root {
   width: 1126px;

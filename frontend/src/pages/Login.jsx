@@ -14,37 +14,6 @@ export default function Login() {
   const [message, setMessage] = useState("")
   const [isError, setisError] = useState(false);
 
-  // const login = async (e) => {
-  //   setLoading(true);
-  //   e.preventDefault();
-
-  //   try {
-  //     const res = await API.post("/login/", data);
-
-  //     if (!res.data.access) {
-  //       throw new Error("No access token received");
-  //     }
-  //     localStorage.setItem("access", res.data.access);
-
-  //     // only store refresh if exists
-  //     if (res.data.refresh) {
-  //       localStorage.setItem("refresh", res.data.refresh);
-  //     }
-  //     setMessage("Login successful")
-  //     setisError(false);
-
-  //     setTimeout(() => {
-  //       navigate("/dashboard")
-  //     }, 1000);
-
-  //   } catch (err) {
-  //     setMessage("Login unsuccessful")
-  //     console.error("LOGIN ERROR:", err.response?.data || err.message);
-  //   }
-  //   setLoading(false);
-  //   setisError(true);
-  // };
-
 
   const login = async (e) => {
     e.preventDefault();
@@ -103,31 +72,31 @@ export default function Login() {
 
 
   return (
-    <div className="min-h-screen pb-28 bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
-      <div className="w-full mb-18 max-w-sm bg-gray-800 dark:bg-white p-8 rounded-2xl shadow-lg border border-gray-700">
+    <div className="fixed inset-4 h-screen overflow-hidden bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
+      <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-3 rounded-xl shadow-lg border border-gray-700">
 
         {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-semibold text-white dark:text-black tracking-wide">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-semibold text-white dark:text-black tracking-wide">
             Login
           </h1>
-          <p className="text-gray-400 dark:text-black text-sm mt-1">
+          <p className="text-gray-400 dark:text-black text-xs mt-1">
             Welcome back, please login
           </p>
         </div>
 
         {/* Form */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           <form
             onSubmit={login}
-            className="space-y-4"
+            className="space-y-3"
           >
 
             <input
               type="text"
               placeholder="Institute Name"
               autoComplete="current-institute_name"
-              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, institute_name: e.target.value })}
             />
 
@@ -136,7 +105,7 @@ export default function Login() {
               type="text"
               placeholder="Username"
               autoComplete="current-username"
-              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, username: e.target.value })}
             />
 
@@ -144,19 +113,26 @@ export default function Login() {
               type="password"
               placeholder="Password"
               autoComplete="current-password"
-              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
 
             <button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl shadow transition duration-300"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl shadow transition duration-300"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
 
+            <p
+              onClick={() => navigate("/forgot-password")}
+              className="text-xs text-blue-400 text-center mt-4 cursor-pointer hover:underline"
+            >
+              Forgot Password?
+            </p>
+
             {message && (
-              <p className={`text-center text-sm mt-2 font-medium ${isError ? "text-red-400" : "text-green-400"}`}>
+              <p className={`text-center text-xs mt-2 font-medium ${isError ? "text-red-400" : "text-green-400"}`}>
                 {message}
               </p>
             )}

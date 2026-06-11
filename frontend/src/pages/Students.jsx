@@ -15,21 +15,21 @@ export default function Students() {
 
 
   return (
-    <div className="p-6 min-h-screen bg-gray-900  dark:bg-blue-200">
+    <div className="p-6 pb-0 flex flex-col overflow-hidden h-full bg-gray-900  dark:bg-blue-200">
 
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-white  dark:text-black">
+      <div className="flex justify-between items-center">
+        <h1 className="fixed z-10 mt-8 text-2xl font-bold text-white  dark:text-black">
           Students
         </h1>
 
-        <span className="bg-blue-500 text-white  dark:text-black  px-4 py-2 rounded-lg shadow">
+        <span className="fixed right-2 bg-blue-500 text-white  dark:text-black  px-3 py-1 rounded-lg shadow">
           Total: {students.length}
         </span>
       </div>
 
       {/* Student Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-10 py-2 overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
         {students.map((s) => (
           <div
@@ -69,7 +69,7 @@ export default function Students() {
             {/* Button */}
             <button
               onClick={() => navigate(`/students/${s.id}`)}
-              className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white  dark:text-black  py-2 rounded transition"
+              className="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white  dark:text-black  py-2 rounded-3xl transition"
             >
               View Profile
             </button>

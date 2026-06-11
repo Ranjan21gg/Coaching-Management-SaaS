@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -68,14 +73,24 @@ MIDDLEWARE = [
 
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://instiflow-three.vercel.app",
+    # "http://localhost:5173",
 ]
 
-from datetime import timedelta
+# email set up for forget passoword
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
+EMAIL_HOST_USER = "sahoolegecy@gmail.com"
+EMAIL_HOST_PASSWORD = "rqtythpiziupglso"
+
+
+# Subscription setup
 RAZORPAY_KEY_ID = "rzp_test_1a2b3c4d5e"
 RAZORPAY_KEY_SECRET = "kJshd73jshd83hshd..."
 
@@ -93,6 +108,9 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
 
 
@@ -123,7 +141,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 import dj_database_url
-import os
 
 DATABASES = {
     'default': dj_database_url.config(

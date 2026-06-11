@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -7,12 +7,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.utils.text import slugify
 
+# Imports for forget passoword
+import random
+from .utils import send_email_async
+from .models import Institute, Membership, PasswordResetOTP
+import random
 
-# from django.http import HttpResponse
-# from django.views.decorators.csrf import csrf_exempt
-# import json
+from datetime import timedelta
+from django.utils import timezone
 
-from .models import Institute, Membership
 # from .models import Subscription
 # from .utils import client
 
@@ -24,8 +27,9 @@ def register(request):
     username = request.data.get('username')
     password = request.data.get('password')
     institute_name = request.data.get('institute_name')
+    email = request.data.get("email")
 
-    if not username or not password or not institute_name:
+    if not username or not password or not institute_name or not email:
         return Response({"error": "All fields required"}, status=400)
 
     # uniqe constraints check
@@ -38,6 +42,7 @@ def register(request):
     # create user
     user = User.objects.create_user(
         username=username,
+        email=email,
         password=password
     )
 
@@ -45,13 +50,19 @@ def register(request):
     slug = slugify(institute_name)
     
     # tenant generation (no duplicates)
-    institute, _ = Institute.objects.get_or_create(
+    existing_institute = Institute.objects.filter(slug=slug).first()
+
+    if existing_institute:
+     return Response(
+         {"error": "Institute already exists"},
+          status=400
+          )
+
+    institute = Institute.objects.create(
         slug=slug,
-        defaults={
-            "name": institute_name,
-            "owner": user
-        }
-    )
+        name=institute_name,
+        owner=user
+        )
     
     # link user to tenant
     Membership.objects.create(
@@ -123,6 +134,185 @@ def login(request):
     })
 
 
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def send_otp(request):
+    username = request.data.get("username")
+    institute_name = request.data.get("institute_name")
+    email = request.data.get("email")
+
+    slug = slugify(institute_name)
+
+    try:
+        institute = Institute.objects.get(slug=slug)
+        membership = Membership.objects.select_related("user").get(
+            user__username=username,
+            institute=institute
+        )
+
+        user = membership.user
+
+    except (Institute.DoesNotExist, Membership.DoesNotExist):
+        return Response(
+            {"error": "User not found"},
+            status=404
+        )
+
+    if user.email != email:
+        return Response(
+            {"error": "Email does not match"},
+            status=400
+        )
+
+    otp = str(random.randint(100000, 999999))
+
+    PasswordResetOTP.objects.create(
+        user=user,
+        otp=otp,
+        expires_at=timezone.now() + timedelta(minutes=5)
+    )
+
+    send_email_async(email, otp)
+
+    return Response({
+        "message": "OTP sent successfully"
+    })
+
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_otp(request):
+    username = request.data.get("username")
+    otp = request.data.get("otp")
+    new_password = request.data.get("new_password")
+
+    # validation
+    if not username or not otp or not new_password:
+        return Response(
+            {"error": "All fields required"},
+            status=400
+        )
+
+    # find user
+    try:
+        user = User.objects.get(username=username)
+
+    except User.DoesNotExist:
+        return Response(
+            {"error": "User not found"},
+            status=404
+        )
+
+    # latest otp
+    otp_record = PasswordResetOTP.objects.filter(
+        user=user,
+        otp=otp
+    ).order_by("-created_at").first()
+
+    # invalid otp
+    if not otp_record:
+        return Response(
+            {"error": "Invalid OTP"},
+            status=400
+        )
+
+    # expiry check
+    if otp_record.is_expired():
+        return Response(
+            {"error": "OTP expired"},
+            status=400
+        )
+
+    # reset password
+    user.set_password(new_password)
+    user.save()
+
+    # delete all old OTPs
+    PasswordResetOTP.objects.filter(
+        user=user
+    ).delete()
+
+    return Response({
+        "message": "Password reset successful"
+    })
+
+
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# def verify_otp(request):
+    # username = request.data.get("username")
+    # otp = request.data.get("otp")
+    # new_password = request.data.get("new_password")
+
+    # try:
+    #     user = User.objects.get(username=username)
+    #     otp_obj = PasswordResetOTP.objects.filter(
+    #         user=user,
+    #         otp=otp
+    #     ).latest("created_at")
+
+    # except Exception:
+    #     return Response(
+    #         {"error": "Invalid OTP"},
+    #         status=400
+    #     )
+
+    # user.password = make_password(new_password)
+    # user.save()
+    # otp_obj.delete()
+
+    # return Response({
+    #     "message": "Password reset successful"
+    # })
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def reset_password(request):
+
+    username = request.data.get("username")
+    email = request.data.get("email")
+    new_password = request.data.get("new_password")
+
+    try:
+        user = User.objects.get(username=username, email=email)
+
+    except User.DoesNotExist:
+        return Response(
+            {"error": "User not found"},
+            status=404
+        )
+
+    # check verified OTP exists
+    otp_record = PasswordResetOTP.objects.filter(
+        user=user,
+        is_verified=True
+    ).order_by("-created_at").first()
+
+    if not otp_record:
+        return Response(
+            {"error": "OTP not verified"},
+            status=403
+        )
+
+    if otp_record.is_expired():
+        return Response(
+            {"error": "OTP expired"},
+            status=400
+        )
+
+    # reset password
+    user.set_password(new_password)
+    user.save()
+
+    # cleanup OTPs (important)
+    PasswordResetOTP.objects.filter(user=user).delete()
+
+    return Response({
+        "message": "Password reset successful"
+    })
 
 
 # # subscription and permission

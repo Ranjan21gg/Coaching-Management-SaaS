@@ -1,6 +1,6 @@
 // src/pages/Subscribe.js
 
-import API from "../api";
+import API from "../../api";
 
 export default function Subscribe() {
 

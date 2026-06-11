@@ -5,7 +5,7 @@ export default function Dashboard() {
   const [students, setStudents] = useState([]);
   const [fees, setFees] = useState([]);
   const [attendance, setAttendance] = useState([]);
-  
+
 
   useEffect(() => {
     fetchData();
@@ -30,7 +30,7 @@ export default function Dashboard() {
     0
   );
 
-  
+
   const handleSubscribe = async () => {
     const res = await API.post("create-subscription/");
 
@@ -51,34 +51,16 @@ export default function Dashboard() {
 
 
   const activate = async () => {
-  await API.post("test-activate/");
-  alert("Test subscription activated");
-};
-
-
-  // export default function Dashboard() {
-  //   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     API.get("check-subscription/")
-  //       .then(res => {
-  //         if (!res.data.active) {
-  //           navigate("/subscribe");
-  //         }
-  //       });
-  //   }, []);
-
-  //   return <h1>Dashboard</h1>;
-  // }
+    await API.post("test-activate/");
+    alert("Test subscription activated");
+  };
 
   return (
-    //"bg-white text-black dark:bg-gray-900 dark:text-white"
+    <div className="h-full p-6 overflow-y-auto bg-gray-900  dark:bg-blue-200 text-white  dark:text-black">
+      <h1 className="fixed top-18 z-40 text-2xl font-bold mb-6">Dashboard</h1>
 
-    <div className="p-6 bg-gray-900  dark:bg-blue-200  min-h-screen text-white  dark:text-black">
-      <h1>{}</h1>
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* cards */}
+      <div className="relative z-20 mt-12 overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
         <div className="bg-blue-500 text-white  dark:text-black  p-6 rounded-xl shadow">
           <h2 className="text-xl font-bold">Students</h2>

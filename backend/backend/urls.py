@@ -21,7 +21,7 @@ from rest_framework.routers import DefaultRouter
 from students.views import StudentViewSet
 from fees.views import FeeViewSet
 from attendance.views import AttendanceViewSet
-from accounts.views import register, login
+from accounts.views import register, login, send_otp, verify_otp
 
 router = DefaultRouter()
 # router.register('students', StudentViewSet)
@@ -35,6 +35,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/register/', register),
     path('api/login/', login),
+    path("api/send-otp/", send_otp),
+    path("api/verify-otp/", verify_otp),
+    
     # path("api/webhook/", razorpay_webhook),
     # path("api/test-activate/", activate_subscription),
 ]
