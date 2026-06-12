@@ -8,12 +8,14 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="h-screen grid grid-rows-[65px_1fr] overflow-hidden">
+    <div className="h-screen grid grid-rows-[auto_1fr] overflow-hidden">
 
       {/* NAVBAR */}
       <div className="sticky top-0 z-50">
         <Navbar />
       </div>
+
+
 
       {/* BODY GRID */}
       <div
@@ -29,7 +31,7 @@ export default function Layout() {
         </div>
 
         {/* RIGHT SIDE (MAIN + FOOTER) */}
-        <div className="grid grid-rows-[1fr_35px] h-full overflow-hidden">
+        <div className="grid grid-rows-[1fr_auto] h-full overflow-hidden">
 
           {/* MAIN */}
           <main className="overflow-y-auto">
@@ -40,7 +42,6 @@ export default function Layout() {
           <Footer />
 
         </div>
-
       </div>
 
     </div>
