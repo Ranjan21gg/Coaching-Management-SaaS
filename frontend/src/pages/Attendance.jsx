@@ -100,11 +100,11 @@ export default function Attendance() {
   );
 
   return (
-    <div className="overflow-hidden flex flex-col h-full bg-gray-900 dark:bg-blue-200 pb-0 p-6">
+    <div className="overflow-hidden flex flex-col h-full bg-gray-900 dark:bg-blue-200 pb-0 p-4">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-3">
-        <h1 className="text-2xl font-bold text-white dark:text-black tracking-wide">
+        <h1 className="text-xl font-bold text-white dark:text-black tracking-wide">
           Attendance Management
         </h1>
 
@@ -114,7 +114,7 @@ export default function Attendance() {
       </div>
 
       {/* Form Attendance Card (Compact) */}
-      <div className="mb-4 bg-gray-800 dark:bg-white border border-gray-700 shadow-md rounded-xl p-3 w-full">
+      <div className="mb-3 bg-gray-800 dark:bg-white border border-gray-700 shadow-md rounded-xl p-3 w-full">
         <h2 className="text-sm font-semibold text-white dark:text-black mb-2">
           {editingId ? "Update Attendance" : "Mark Attendance"}
         </h2>
@@ -185,7 +185,7 @@ export default function Attendance() {
 
 
       {/* Attendance Cards List (Compact Grid) */}
-      <div className="h-[calc(100vh-300px)] overflow-y-auto">
+      <div className="h-[calc(100vh-auto)] overflow-y-auto">
         <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4 w-auto">
 
           {[...attendance]

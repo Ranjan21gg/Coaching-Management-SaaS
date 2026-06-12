@@ -65,14 +65,14 @@ export default function Fees() {
   );
 
   return (
-    <div className="flex flex-col overflow-hidden h-full bg-gray-900 dark:bg-blue-200 pb-0 p-6">
+    <div className="flex flex-col overflow-hidden h-full bg-gray-900 dark:bg-blue-200 pb-0 p-4">
 
       {/* Sticky Top Container (Fixes Header & Form Card to the top) */}
-      <div className="sticky top-0 z-40 bg-gray-900 dark:bg-blue-200 pt-1 pb-2">
+      <div className="sticky top-0 z-40 bg-gray-900 dark:bg-blue-200">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-2">
-          <h1 className="text-2xl font-bold text-white dark:text-black tracking-wide">
+          <h1 className="text-xl font-bold text-white dark:text-black tracking-wide">
             Fees Management
           </h1>
 
@@ -175,7 +175,7 @@ export default function Fees() {
 
 
       {/* Fee Cards List (Compact Grid) */}
-      <div className="h-[calc(100vh-300px)] overflow-y-auto">
+      <div className="h-[calc(100vh-auto)] overflow-y-auto">
         <div className="overflow-y-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 pb-4 w-auto">
           {fees.map((fee) => (
             <div

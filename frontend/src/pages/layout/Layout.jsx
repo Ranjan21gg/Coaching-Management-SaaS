@@ -8,42 +8,43 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="h-screen grid grid-rows-[auto_1fr] overflow-hidden">
+    <div className="h-screen flex flex-col">
 
       {/* NAVBAR */}
-      <div className="sticky top-0 z-50">
+      <div className="sticky top-0 z-50 shrink-0">
         <Navbar />
       </div>
 
+      {/* BODY */}
+      <div className="flex-1 overflow-hidden">
 
-
-      {/* BODY GRID */}
-      <div
-        className={`
-      grid h-full duration-300 ease-linear overflow-hidden
-      ${open ? "grid-cols-[146px_1fr]" : "grid-cols-[78px_1fr]"}
-    `}
-      >
-
-        {/* SIDEBAR */}
-        <div className="h-full md:block overflow-hidden">
+        {/* Desktop */}
+        <div
+          className={`
+        hidden md:grid h-full
+        ${open ? "grid-cols-[146px_1fr] duration-300 ease-linear" : "grid-cols-[68px_1fr]"}`}
+        >
           <Sidebar open={open} setOpen={setOpen} />
+          <div className="grid grid-rows-[1fr_auto] overflow-hidden">
+            <main className="flex-1 overflow-y-auto">
+              <Outlet />
+            </main>
+            <Footer />
+          </div>
+
         </div>
 
-        {/* RIGHT SIDE (MAIN + FOOTER) */}
-        <div className="grid grid-rows-[1fr_auto] h-full overflow-hidden">
+        {/* Mobile */}
+        <div className="md:hidden grid grid-rows-[1fr_auto] h-full">
 
-          {/* MAIN */}
-          <main className="overflow-y-auto">
+          <main className="flex-1 overflow-y-auto">
             <Outlet />
           </main>
-
-          {/* FOOTER */}
+          <Sidebar open={open} setOpen={setOpen} />
           <Footer />
-
         </div>
-      </div>
 
+      </div>
     </div>
   );
 }
