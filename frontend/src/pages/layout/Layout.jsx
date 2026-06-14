@@ -8,38 +8,45 @@ export default function Layout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden bg-gray-900 dark:bg-blue-200">
 
       {/* NAVBAR */}
-      <div className="sticky top-0 z-50 shrink-0">
+      <div className="shrink-0 sticky top-0 z-50">
         <Navbar />
       </div>
 
       {/* BODY */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden flex">
 
         {/* Desktop */}
         <div
           className={`
-        hidden md:grid h-full
-        ${open ? "grid-cols-[146px_1fr] duration-300 ease-linear" : "grid-cols-[68px_1fr]"}`}
+        hidden md:grid flex-1 h-full
+        ${open ? "grid-cols-[146px_1fr]" : "grid-cols-[68px_1fr]"}
+      `}
         >
           <Sidebar open={open} setOpen={setOpen} />
-          <div className="grid grid-rows-[1fr_auto] overflow-hidden">
+
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col h-full overflow-hidden">
+
+            {/* SCROLL AREA */}
             <main className="flex-1 overflow-y-auto">
               <Outlet />
             </main>
+
+            {/* FOOTER */}
             <Footer />
           </div>
-
         </div>
 
         {/* Mobile */}
-        <div className="md:hidden grid grid-rows-[1fr_auto] h-full">
+        <div className="md:hidden flex flex-col flex-1 h-full overflow-hidden">
 
           <main className="flex-1 overflow-y-auto">
             <Outlet />
           </main>
+
           <Sidebar open={open} setOpen={setOpen} />
           <Footer />
         </div>
