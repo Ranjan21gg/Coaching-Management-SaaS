@@ -45,7 +45,7 @@ export default function Navbar() {
         {/* Menu */}
         <div
           className="flex flex-wrap items-center justify-end gap-1"
-         
+
         >
           {/* <UserCard /> */}
 
@@ -64,6 +64,18 @@ export default function Navbar() {
             )} */}
 
 
+            <div>
+              {/* Premium */}
+              {!isSubscribed && (
+                <button
+                  onClick={() => navigate("/subscribe")}
+                  className="flex items-center gap-0 bg-yellow-500 text-black ml-0 mr-0 px-1 py-1 text-xs font-bold rounded-lg hover:bg-white hover:text-blue-700">
+                  <Crown size={20} />
+                  Premium Plan
+                </button>
+              )}
+            </div>
+
             {/* Theme */}
             <button
               onClick={handleToggle}
@@ -71,18 +83,6 @@ export default function Navbar() {
             >
               {!isDark ? <Sun size={24} className="text-yellow-400 drop-shadow-md" /> : <Moon size={24} className="text-blue-300 drop-shadow-md" />}
             </button>
-          </div>
-
-          <div>
-            {/* Premium */}
-            {!isSubscribed && (
-              <button
-                onClick={() => navigate("/subscribe")}
-                className="flex items-center gap-0 bg-yellow-500 text-black ml-0 mr-0 px-1 py-1 text-xs font-bold rounded-lg hover:bg-white hover:text-blue-700">
-                <Crown size={20} />
-                Premium Plan
-              </button>
-            )}
           </div>
 
         </div>

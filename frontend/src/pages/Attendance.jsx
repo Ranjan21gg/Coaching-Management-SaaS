@@ -96,7 +96,7 @@ export default function Attendance() {
   );
 
   return (
-    <div className="overflow-hidden flex flex-col h-full bg-gray-900 dark:bg-blue-200 pb-0 p-4">
+    <div className="flex flex-col h-full bg-gray-900 dark:bg-blue-200 pb-0 p-4">
 
       {/* Header */}
       <div className="flex justify-between items-center mb-3">

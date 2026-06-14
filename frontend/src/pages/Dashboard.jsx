@@ -34,11 +34,11 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="h-full p-6 overflow-y-auto bg-gray-900  dark:bg-blue-200 text-white  dark:text-black">
-      <h1 className="fixed top-18 z-40 text-2xl font-bold mb-6">Dashboard</h1>
+    <div className="h-full p-2 bg-gray-900  dark:bg-blue-200 text-white  dark:text-black">
+      <h1 className="z-40 text-2xl font-bold mb-6">Dashboard</h1>
 
       {/* cards */}
-      <div className="relative z-20 mt-12 overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="relative z-20 overflow-hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
         <div className="bg-blue-500 text-white  dark:text-black  p-6 rounded-xl shadow">
           <h2 className="text-xl font-bold">Students</h2>

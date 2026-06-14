@@ -9,8 +9,9 @@ from django.utils.text import slugify
 
 # Imports for forget passoword
 import random
-from .utils import send_email_async
+from .utils import send_mail
 from .models import Institute, Membership, PasswordResetOTP
+from django.conf import settings
 
 from datetime import timedelta
 from django.utils import timezone
@@ -170,13 +171,22 @@ def send_otp(request):
 
     otp = str(random.randint(100000, 999999))
 
+    print("OTP:", otp)
+    print("Sending to:", email)
+
     PasswordResetOTP.objects.create(
         user=user,
         otp=otp,
         expires_at=timezone.now() + timedelta(minutes=5)
     )
 
-    send_email_async(email, otp)
+    send_mail(
+    "Password Reset OTP",
+    f"Your OTP is {otp}",
+    settings.EMAIL_HOST_USER,
+    [email],
+    fail_silently=False,
+)
 
     return Response({
         "message": "OTP sent successfully"
