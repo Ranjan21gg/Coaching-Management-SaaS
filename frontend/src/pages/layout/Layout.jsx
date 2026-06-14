@@ -31,7 +31,7 @@ export default function Layout() {
         <div className="flex flex-col flex-1 overflow-hidden">
 
           {/* SCROLL AREA */}
-          <main className="flex-1 overflow-y-auto p-3">
+          <main className="flex-1 overflow-y-auto">
             <Outlet />
           </main>
 
@@ -46,7 +46,7 @@ export default function Layout() {
       {/* MOBILE */}
       <div className="md:hidden flex flex-col flex-1 overflow-hidden">
 
-        <main className="flex-1 overflow-y-auto p-3">
+        <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
 

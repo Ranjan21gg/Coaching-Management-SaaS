@@ -51,7 +51,7 @@ export default function Sidebar({ open, setOpen }) {
     <aside
       className={`bg-gray-900 text-white dark:text-black dark:bg-blue-200
       shadow-lg border-r border-blue-500
-      md:h-[calc(100vh-64px)]
+      md:h-[calc(100vh-48px)]
       h-auto
       md:flex md:flex-col
       transition-all duration-300

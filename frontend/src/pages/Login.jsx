@@ -73,7 +73,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="h-full overflow-hidden bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4">
+     <div className=" bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4 py-6">
         <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-3 rounded-xl shadow-lg border border-gray-700">
 
           {/* Header */}
