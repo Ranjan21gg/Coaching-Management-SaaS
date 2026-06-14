@@ -48,15 +48,6 @@ export default function Sidebar({ open, setOpen }) {
   ];
 
   return (
-    // <aside
-    //   className={`h-[calc(100vh-64px)] bg-gray-900 text-white dark:text-black dark:bg-blue-200 
-    // flex flex-col shadow-lg border-r border-blue-500 
-    // transition-all duration-300 z-40
-    //     ${open ? "w-auto text-xs" : "w-18 text-xs"}
-    //   `}
-    // >
-
-
     <aside
       className={`bg-gray-900 text-white dark:text-black dark:bg-blue-200
       shadow-lg border-r border-blue-500
@@ -106,7 +97,6 @@ export default function Sidebar({ open, setOpen }) {
 
 
       {/* Menu */}
-      {/* <nav className="flex flex-col gap-1 p-1 flex-1 overflow-y-auto"> */}
       <nav className="
           flex flex-row md:flex-col
           gap-x-6 p-1 flex-1
@@ -114,7 +104,7 @@ export default function Sidebar({ open, setOpen }) {
         ">
 
         {menuItems.map((item) => {
-          // const isActive = location.pathname === item.path;
+          const isActive = location.pathname === item.path;
 
           return (
             <Link
