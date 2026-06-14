@@ -1,5 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import API from "../api";
+
+const getFees = async () => {
+  const res = await API.get("fees/");
+  return res.data;
+};
+
+const getStudents = async () => {
+  const res = await API.get("students/");
+  return res.data;
+};
 
 export default function Fees() {
   const [fees, setFees] = useState([]);
@@ -13,20 +23,25 @@ export default function Fees() {
   const [search, setSearch] = useState("");
   const [selectedStudentName, setSelectedStudentName] = useState("");
 
-  useEffect(() => {
-    fetchFees();
-    fetchStudents();
+  const fetchFees = useCallback(async () => {
+    setFees(await getFees());
   }, []);
 
-  const fetchFees = async () => {
-    const res = await API.get("fees/");
-    setFees(res.data);
-  };
+  useEffect(() => {
+    let isActive = true;
 
-  const fetchStudents = async () => {
-    const res = await API.get("students/");
-    setStudents(res.data);
-  };
+    Promise.all([getFees(), getStudents()])
+      .then(([feeData, studentData]) => {
+        if (!isActive) return;
+        setFees(feeData);
+        setStudents(studentData);
+      })
+      .catch((error) => console.error(error));
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const handleSubmit = async () => {
     if (editingId) {
@@ -41,6 +56,8 @@ export default function Fees() {
       total_fee: "",
       paid_fee: "",
     });
+    setSelectedStudentName("");
+    setSearch("");
 
     fetchFees();
   };
@@ -51,6 +68,8 @@ export default function Fees() {
       total_fee: fee.total_fee,
       paid_fee: fee.paid_fee,
     });
+    setSelectedStudentName(students.find((student) => student.id === fee.student)?.name || "");
+    setSearch("");
     setEditingId(fee.id);
   };
 
@@ -121,7 +140,7 @@ export default function Fees() {
                           setSelectedStudentName(student.name);
                           setSearch("");
                         }}
-                        className="w-20px text-left px-2.5 py-1.5 text-xs text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-100"
+                        className="w-full text-left px-2.5 py-1.5 text-xs text-white dark:text-black hover:bg-gray-700 dark:hover:bg-gray-100"
                       >
                         {student.name}
                       </button>

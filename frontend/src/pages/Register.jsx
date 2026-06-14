@@ -29,7 +29,7 @@ export default function Register() {
         navigate("/");
       }, 1000);
 
-    } catch (err) {
+    } catch {
       setMessage("Registration failed");
       setisError(false)
     }
@@ -99,10 +99,14 @@ export default function Register() {
               {loading ? "Registering..." : "Register"}
             </button>
 
+            <div className="text-left text-blue-500">
+              <p className="text-gray-500 text-sm flex gap-1">Have an account?
+                <button type="button" className="text-blue-500 cursor-pointer hover:underline" onClick={() => navigate("/")}>Sign in</button></p>
+            </div>
+
             {message && (
               <p
-                className={`text-center text-xs mt-2 font-medium ${isError ? "text-green-400" : "text-red-400"}`}
-              >
+                className={`text-center text-xs mt-2 font-medium ${isError ? "text-green-400" : "text-red-400"}`}>
                 {message}
               </p>
             )}

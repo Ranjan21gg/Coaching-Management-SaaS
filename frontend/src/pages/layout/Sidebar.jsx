@@ -1,5 +1,5 @@
 // Sidebar.jsx
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   LayoutDashboard,
   Users,
@@ -9,18 +9,15 @@ import {
   LogOut,
   Menu,
 } from "lucide-react";
+import { getStoredUser } from "../../storage";
 
 export default function Sidebar({ open, setOpen }) {
-  const location = useLocation();
-
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/";
   };
 
-  const user = JSON.parse(
-    localStorage.getItem('user')
-  )
+  const user = getStoredUser();
 
   const menuItems = [
     {
@@ -87,11 +84,11 @@ export default function Sidebar({ open, setOpen }) {
             <div className="flex leading-tight">
               <div className="flex items-center gap-1">
                 <p className="text-[14px] font-semibold text-gray-200 dark:text-black">
-                  {user.username}
+                  {user.username || "User"}
                 </p>
 
                 <span className="text-[9px] bg-yellow-400 text-black px-1 rounded-full font-semibold capitalize">
-                  {user.role}
+                  {user.role || "member"}
                 </span>
               </div>
             </div>
@@ -120,24 +117,22 @@ export default function Sidebar({ open, setOpen }) {
           // const isActive = location.pathname === item.path;
 
           return (
-            <>
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`flex items-center rounded-lg p-2 text-xs transition-all duration-200
+            <Link
+              key={item.name}
+              to={item.path}
+              className={`flex items-center rounded-lg p-2 text-xs transition-all duration-200
                 hover:text-black hover:bg-blue-200
                 dark:hover:text-white dark:hover:bg-blue-600
               ${open ? "gap-3 justify-start" : "justify-center"}`}
-              >
-                <item.icon size={20} />
+            >
+              <item.icon size={20} />
 
-                {open && (
-                  <span className="whitespace-nowrap">
-                    {item.name}
-                  </span>
-                )}
-              </Link>
-            </>
+              {open && (
+                <span className="whitespace-nowrap">
+                  {item.name}
+                </span>
+              )}
+            </Link>
           );
         })}
       </nav>

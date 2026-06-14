@@ -1,5 +1,15 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import API from "../api";
+
+const getAttendance = async () => {
+  const res = await API.get("attendance/");
+  return res.data;
+};
+
+const getStudents = async () => {
+  const res = await API.get("students/");
+  return res.data;
+};
 
 export default function Attendance() {
   const [attendance, setAttendance] = useState([]);
@@ -13,40 +23,26 @@ export default function Attendance() {
   // Search student name
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    fetchAttendance();
-    fetchStudents();
+  // All api fetch stuff here //
+  const fetchAttendance = useCallback(async () => {
+    setAttendance(await getAttendance());
   }, []);
 
-  // All api fetch stuff here //
-  const fetchAttendance = async () => {
-    const res = await API.get("attendance/");
-    setAttendance(res.data);
-  };
+  useEffect(() => {
+    let isActive = true;
 
-  const fetchStudents = async () => {
-    const res = await API.get("students/");
-    setStudents(res.data);
-  };
+    Promise.all([getAttendance(), getStudents()])
+      .then(([attendanceData, studentData]) => {
+        if (!isActive) return;
+        setAttendance(attendanceData);
+        setStudents(studentData);
+      })
+      .catch((error) => console.error(error));
 
-  const handleSubmit = async () => {
-    if (editingId) {
-      await API.put(`attendance/${editingId}/`, form);
-      setEditingId(null);
-    } else {
-      await API.post("attendance/", form);
-    }
-
-    setForm({
-      student: "",
-      present: true,
-    });
-
-    fetchAttendance();
-  };
-
-
-
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   const markAttendance = async (status) => {
     if (!form.student) {
@@ -282,5 +278,5 @@ export default function Attendance() {
 
     </div>
 
-  )
-};
+  );
+}

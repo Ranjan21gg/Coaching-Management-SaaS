@@ -30,9 +30,9 @@ export default function ForgotPassword() {
             setTimeout(() => {
                 navigate("/verify-otp", {
                     state: {
-                        username:formData.username,
-                        email:formData.email,
-                        institute_name:formData.institute_name
+                        username: formData.username,
+                        email: formData.email,
+                        institute_name: formData.institute_name
                     }
                 });
             }, 1000);
@@ -93,6 +93,11 @@ export default function ForgotPassword() {
                         </button>
                     </form>
 
+                    <p onClick={() => navigate("/")}
+                        className="text-sm text-blue-400 text-center cursor-pointer hover:underline"
+                    >
+                        Login !!
+                    </p>
 
                     {message && (
                         <p className="text-center text-sm text-gray-300 dark:text-black mt-4">

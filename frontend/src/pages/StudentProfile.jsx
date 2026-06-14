@@ -11,23 +11,28 @@ export default function StudentProfile() {
   const [attendance, setAttendance] = useState([]);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    let isActive = true;
 
-  const fetchData = async () => {
-    try {
-      const studentRes = await API.get(`students/${id}/`);
-      const feeRes = await API.get(`fees/?student=${id}`);
-      const attRes = await API.get(`attendance/?student=${id}`);
+    Promise.all([
+      API.get(`students/${id}/`),
+      API.get(`fees/?student=${id}`),
+      API.get(`attendance/?student=${id}`),
+    ])
+      .then(([studentRes, feeRes, attRes]) => {
+        if (!isActive) return;
+        setStudent(studentRes.data);
+        setFees(feeRes.data);
+        setAttendance(attRes.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Error loading data");
+      });
 
-      setStudent(studentRes.data);
-      setFees(feeRes.data);
-      setAttendance(attRes.data);
-    } catch (err) {
-      console.log(err);
-      alert("Error loading data");
-    }
-  };
+    return () => {
+      isActive = false;
+    };
+  }, [id]);
 
   if (!student) return <p className="text-white p-6">Loading...</p>;
 

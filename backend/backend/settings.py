@@ -25,10 +25,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS',default="*").split(',')
+def config_bool(name, default=False):
+    value = str(config(name, default=default)).strip().lower()
+
+    if value in {"1", "true", "yes", "on", "debug", "development", "dev"}:
+        return True
+
+    if value in {"0", "false", "no", "off", "release", "production", "prod"}:
+        return False
+
+    raise ValueError(f"Invalid boolean value for {name}: {value}")
+
+
+def config_csv(name, default=""):
+    return [
+        value.strip()
+        for value in config(name, default=default).split(",")
+        if value.strip()
+    ]
+
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config_bool("DEBUG")
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in config('ALLOWED_HOSTS', default="*").split(',')
+    if host.strip()
+]
 
 
 # Application definition
@@ -53,6 +78,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
     # for staticfiles deployment runtime
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -64,17 +90,23 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-
-    'corsheaders.middleware.CorsMiddleware',
-
 ]
 
-CORS_ALLOWED_ORIGINS = True
+CORS_ALLOWED_ORIGINS = sorted(set(config_csv(
+    "CORS_ALLOWED_ORIGINS",
+    default="https://instiflow-three.vercel.app",
+) + [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]))
 
-CORS_ALLOWED_ORIGINS = [
-    "https://instiflow-three.vercel.app",
-    # "http://localhost:5173",
-]
+CORS_ALLOWED_ORIGIN_REGEXES = sorted(set(config_csv(
+    "CORS_ALLOWED_ORIGIN_REGEXES",
+    default="",
+) + [
+    r"^http://localhost:\d+$",
+    r"^http://127\.0\.0\.1:\d+$",
+]))
 
 # email set up for forget passoword
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -82,13 +114,13 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = "sahoolegecy@gmail.com"
-EMAIL_HOST_PASSWORD = "rqtythpiziupglso"
+EMAIL_HOST_USER = config("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD", default="")
 
 
 # Subscription setup
-RAZORPAY_KEY_ID = "rzp_test_1a2b3c4d5e"
-RAZORPAY_KEY_SECRET = "kJshd73jshd83hshd..."
+RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="")
+RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET", default="")
 
 
 REST_FRAMEWORK = {

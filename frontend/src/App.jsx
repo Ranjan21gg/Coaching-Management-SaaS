@@ -15,9 +15,7 @@ import Attendance from "./pages/Attendance";
 import Subscribe from "./pages/subscription/Subscribe";
 
 import AuthLayout from "./pages/AuthLayout";
-import Navbar from "./pages/layout/Navbar";
 import Layout from "./pages/layout/Layout";
-import Footer from "./pages/layout/Footer";
 import PrivateRoute from "./pages/layout/PrivateRoute";
 
 
@@ -50,5 +48,4 @@ export default function App() {
     </>
   );
 }
-
 

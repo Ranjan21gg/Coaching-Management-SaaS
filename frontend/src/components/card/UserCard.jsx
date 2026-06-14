@@ -1,9 +1,9 @@
 
+import { getStoredUser } from "../../storage";
+
 export default function UserCard() {
     const isLoggedIn = !!localStorage.getItem("access"); // ✅ FIXED  
-    const user = JSON.parse(
-        localStorage.getItem("user")
-    );
+    const user = getStoredUser();
 
     return (
         <div>

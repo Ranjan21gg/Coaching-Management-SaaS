@@ -11,7 +11,6 @@ from django.utils.text import slugify
 import random
 from .utils import send_email_async
 from .models import Institute, Membership, PasswordResetOTP
-import random
 
 from datetime import timedelta
 from django.utils import timezone
@@ -32,12 +31,22 @@ def register(request):
     if not username or not password or not institute_name or not email:
         return Response({"error": "All fields required"}, status=400)
 
+    # slug generation
+    slug = slugify(institute_name)
+
     # uniqe constraints check
     if User.objects.filter(username=username).exists():
-       return Response(
-           {"error": "Username already exists"},
-           tatus=400
-           )
+        return Response(
+            {"error": "Username already exists"},
+            status=400
+        )
+
+    # tenant generation (no duplicates)
+    if Institute.objects.filter(slug=slug).exists():
+        return Response(
+            {"error": "Institute already exists"},
+            status=400
+        )
 
     # create user
     user = User.objects.create_user(
@@ -45,18 +54,6 @@ def register(request):
         email=email,
         password=password
     )
-
-    # slug generation
-    slug = slugify(institute_name)
-    
-    # tenant generation (no duplicates)
-    existing_institute = Institute.objects.filter(slug=slug).first()
-
-    if existing_institute:
-     return Response(
-         {"error": "Institute already exists"},
-          status=400
-          )
 
     institute = Institute.objects.create(
         slug=slug,
@@ -141,6 +138,12 @@ def send_otp(request):
     username = request.data.get("username")
     institute_name = request.data.get("institute_name")
     email = request.data.get("email")
+
+    if not username or not institute_name or not email:
+        return Response(
+            {"error": "All fields required"},
+            status=400
+        )
 
     slug = slugify(institute_name)
 

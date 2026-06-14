@@ -8,52 +8,30 @@ export default function Dashboard() {
 
 
   useEffect(() => {
-    fetchData();
+    let isActive = true;
+
+    Promise.all([
+      API.get("students/"),
+      API.get("fees/"),
+      API.get("attendance/"),
+    ])
+      .then(([studentRes, feeRes, attendanceRes]) => {
+        if (!isActive) return;
+        setStudents(studentRes.data);
+        setFees(feeRes.data);
+        setAttendance(attendanceRes.data);
+      })
+      .catch((error) => console.log(error));
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const studentRes = await API.get("students/");
-      const feeRes = await API.get("fees/");
-      const attendanceRes = await API.get("attendance/");
-
-      setStudents(studentRes.data);
-      setFees(feeRes.data);
-      setAttendance(attendanceRes.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const totalPendingFees = fees.reduce(
-    (acc, fee) => acc + fee.due,
+    (acc, fee) => acc + Number(fee.due || 0),
     0
   );
-
-
-  const handleSubscribe = async () => {
-    const res = await API.post("create-subscription/");
-
-    const options = {
-      key: "rzp_test_xxx",
-      subscription_id: res.data.id,
-      name: "Coaching SaaS",
-      description: "Monthly Plan",
-      handler: function () {
-        alert("Payment Successful");
-      }
-    };
-
-    const rzp = new window.Razorpay(options);
-    rzp.open();
-  };
-
-
-
-  const activate = async () => {
-    await API.post("test-activate/");
-    alert("Test subscription activated");
-  };
 
   return (
     <div className="h-full p-6 overflow-y-auto bg-gray-900  dark:bg-blue-200 text-white  dark:text-black">
