@@ -182,7 +182,7 @@ export default function Attendance() {
 
       {/* Attendance Cards List (Compact Grid) */}
       <div className="h-[calc(100vh-auto)] overflow-y-auto">
-        <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 pb-4 w-auto">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 pb-4 w-auto">
 
           {[...attendance]
             .sort((a, b) => new Date(b.date) - new Date(a.date))

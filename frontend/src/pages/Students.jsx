@@ -15,7 +15,7 @@ export default function Students() {
 
 
   return (
-    <div className="p-4 flex flex-col overflow-hidden bg-gray-900  dark:bg-blue-200">
+    <div className="flex flex-col h-full p-4 overflow-hidden bg-gray-900  dark:bg-blue-200">
 
       {/* Header */}
       <div className="flex justify-between items-center">
@@ -29,7 +29,7 @@ export default function Students() {
       </div>
 
       {/* Student Cards */}
-      <div className="mt-10 z-10 overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="mt-10 z-10 overflow-y-auto grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
 
         {students.map((s) => (
           <div
