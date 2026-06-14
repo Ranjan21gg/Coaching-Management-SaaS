@@ -42,14 +42,6 @@ export default function Navbar() {
           />
         </div>
 
-        {/* Toggle
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="p-2 md:hidden"
-        >
-          <Menu size={24} />
-        </button> */}
-
         {/* Menu */}
         <div
           className="flex flex-wrap items-center justify-end gap-1"
@@ -59,7 +51,7 @@ export default function Navbar() {
 
           <div className="flex flex-wrap items-center justify-end gap-1 text-sm">
             {/* Logged out */}
-            {!isLoggedIn && (
+            {/* {!isLoggedIn && (
               <>
                 <Link to="/register" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
                   <UserPlus size={18} /> Register
@@ -69,7 +61,7 @@ export default function Navbar() {
                   <LogIn size={18} /> Login
                 </Link>
               </>
-            )}
+            )} */}
 
 
             {/* Theme */}

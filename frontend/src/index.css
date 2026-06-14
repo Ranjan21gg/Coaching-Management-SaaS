@@ -56,27 +56,17 @@
 }
 
 
-
-
-html, body, #root {
-  height: 100%;
-  overflow: hidden;
-}
-
-
-
-
 /* body {
   margin: 0;
   overflow-y: auto;
 } */
-/* html,
+html,
 body,
 #root {
   height: 100%;
   margin: 0;
   overflow: auto;
-} */
+}
 
 html {
   transition: background-color 0.3s, color 0.3s;
