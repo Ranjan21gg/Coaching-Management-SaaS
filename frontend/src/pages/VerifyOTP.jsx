@@ -95,10 +95,8 @@ export default function VerifyOTP() {
     };
 
     return (
-
-        <div className="h-screen overflow-hidden flex items-center justify-center bg-gray-900 dark:bg-blue-200 px-4">
-            <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-6 py-4 rounded-xl shadow-xl border border-gray-700">
-
+        <div className="h-full flex items-center justify-center px-4 bg-gray-900 dark:bg-blue-200">
+            <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-4 rounded-2xl shadow-lg border border-gray-700">
                 <h1 className="text-2xl font-bold text-white dark:text-black text-center mb-4">
                     Verify OTP
                 </h1>

@@ -45,11 +45,14 @@ export default function Layout() {
 
       {/* MOBILE */}
       <div className="md:hidden flex flex-col flex-1 overflow-hidden">
-        <Sidebar open={open} setOpen={setOpen} />
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
-        <Footer />
+
+        <div className="pb-4 overflow-auto">
+          <Sidebar open={open} setOpen={setOpen} />
+          <Footer />
+        </div>
       </div>
     </div>
   );

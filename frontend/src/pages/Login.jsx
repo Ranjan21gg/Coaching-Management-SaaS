@@ -73,9 +73,9 @@ export default function Login() {
 
   return (
     <>
-     <div className=" bg-gray-900 dark:bg-blue-200 flex items-center justify-center px-4 py-6">
-        <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-3 rounded-xl shadow-lg border border-gray-700">
-
+      <div className="h-full flex items-center justify-center px-4 bg-gray-900 dark:bg-blue-200">
+        <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-4 rounded-2xl shadow-lg border border-gray-700">
+          
           {/* Header */}
           <div className="text-center mb-4">
             <h1 className="text-2xl font-semibold text-white dark:text-black tracking-wide">
