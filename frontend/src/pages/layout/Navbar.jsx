@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky z-50 top-0 bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 py-1 gap-24 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 py-1 gap-0 flex items-center justify-between">
 
         <div className="flex items-center">
           <img
