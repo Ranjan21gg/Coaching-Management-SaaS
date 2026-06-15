@@ -44,16 +44,25 @@ export default function Layout() {
       </div>
 
       {/* MOBILE */}
-      <div className="md:hidden flex flex-col flex-1 overflow-hidden">
+      <div className="md:hidden flex flex-col h-dvh overflow-hidden">
+
+        {/* Main Content */}
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
 
-        <div className="pb-4 overflow-auto">
+        {/* Bottom Navigation / Sidebar */}
+        <div className="shrink-0">
           <Sidebar open={open} setOpen={setOpen} />
+        </div>
+
+        {/* Footer */}
+        <div className="shrink-0">
           <Footer />
         </div>
+
       </div>
+
     </div>
   );
 }
