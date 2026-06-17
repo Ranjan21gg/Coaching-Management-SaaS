@@ -15,7 +15,7 @@ export default function Students() {
 
 
   return (
-    <div className="flex flex-col h-full p-4 overflow-hidden bg-gray-900  dark:bg-blue-200">
+    <div className="flex flex-col h-full p-4 pb-0 overflow-hidden bg-gray-900  dark:bg-blue-200">
 
       {/* Header */}
       <div className="flex justify-between items-center">

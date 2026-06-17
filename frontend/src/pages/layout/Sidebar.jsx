@@ -70,7 +70,7 @@ export default function Sidebar({ open, setOpen }) {
         {open?(
           <div
             onClick={() => setOpen(!open)}
-            className="flex items-center gap-2 bg-white/10 px-2 py-1.5 rounded-xl border border-white/20 dark:border-black">
+            className="flex items-center gap-2 cursor-pointer bg-white/10 px-2 py-1.5 rounded-xl border hover:bg-cyan-600 border-white/20 dark:border-black">
             {/* Info */}
             <div className="flex leading-tight">
               <div className="flex items-center gap-1">
@@ -113,7 +113,7 @@ export default function Sidebar({ open, setOpen }) {
               className={`flex items-center rounded-lg p-2 text-xs transition-all duration-200
                 hover:text-black hover:bg-blue-200
                 dark:hover:text-white dark:hover:bg-blue-600
-              ${open ? "gap-3 justify-start" : "justify-center"}`}
+              ${open ? "gap-2 justify-start" : "justify-center"}`}
             >
               <item.icon size={20} />
 
@@ -131,16 +131,9 @@ export default function Sidebar({ open, setOpen }) {
       {/* Logout */}
       <button
         onClick={handleLogout}
-        className="
-          flex items-center gap-2 p-5
-          text-xs
-          text-red-400
-          hover:text-red-700
-          transition-all
-        "
+        className="flex items-center gap-2 p-4 text-xs text-red-400 hover:text-red-700 transition-all"
       >
         <LogOut size={20} />
-
         {open && <span>Logout</span>}
         {open && (
           <span className="hidden">
