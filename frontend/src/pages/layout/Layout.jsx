@@ -19,7 +19,7 @@ export default function Layout() {
       <div
         className={`
         hidden md:grid h-full
-        ${open ? "grid-cols-[146px_1fr] duration-300 ease-linear" : "grid-cols-[68px_1fr]"}`}
+        ${open ? "grid-cols-[134px_1fr] duration-300 ease-in-out" : "grid-cols-[58px_1fr]"}`}
       >
 
         {/* SIDEBAR (FIXED LEFT) */}
