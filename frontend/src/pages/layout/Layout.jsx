@@ -49,7 +49,7 @@ export default function Layout() {
           <Outlet />
         </main>
 
-        <div className="pb-8 overflow-y-visible">
+        <div className="pb-6 overflow-y-visible">
           <Sidebar open={open} setOpen={setOpen} />
           <Footer />
         </div>
