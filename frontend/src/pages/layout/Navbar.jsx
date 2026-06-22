@@ -15,6 +15,7 @@ export default function Navbar() {
   const isLoggedIn = !!localStorage.getItem("access"); // ✅ FIXED  
   const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
   const isSubscribed = getStoredUser().is_subscribed;
+  const user = getStoredUser();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme");
@@ -42,12 +43,15 @@ export default function Navbar() {
           />
         </div>
 
+        <p className="text-[20px] font-semibold text-gray-200 dark:text-black">
+          {user.institute || "Institute"}
+        </p>
+
         {/* Menu */}
         <div
           className="flex flex-wrap items-center justify-end gap-1"
 
         >
-          {/* <UserCard /> */}
 
           <div className="flex flex-wrap items-center justify-end gap-1 text-sm">
             {/* Logged out */}
