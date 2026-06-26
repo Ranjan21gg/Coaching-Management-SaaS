@@ -90,16 +90,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
-CORS_ALLOWED_ORIGINS = sorted(set(config_csv(
-    "CORS_ALLOWED_ORIGINS",
-    default="https://instiflow-three.vercel.app",
-) + [
+CORS_ALLOWED_ORIGINS = [
+    "https://instiflow-three.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-]))
+]
 
 CORS_ALLOWED_ORIGIN_REGEXES = sorted(set(config_csv(
     "CORS_ALLOWED_ORIGIN_REGEXES",
