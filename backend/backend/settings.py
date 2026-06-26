@@ -78,8 +78,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 
     # for staticfiles deployment runtime
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -97,6 +97,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGIN_REGEXES = sorted(set(config_csv(
     "CORS_ALLOWED_ORIGIN_REGEXES",
