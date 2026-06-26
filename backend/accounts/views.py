@@ -66,7 +66,7 @@ def register(request):
     Membership.objects.create(
         user=user,
         institute=institute,
-        role='admin'
+        defaults={"role": "admin"}
     )
 
     return Response({"msg": "User + Institute created Successfully"})
@@ -102,13 +102,17 @@ def login(request):
         return Response({"error": "Invalid credentials"}, status=401)
     
     # Verify membership
-    try:
-        membership = Membership.objects.select_related('institute').get(
-            user=user,
-            institute__slug=slug
-        )
-    except Membership.DoesNotExist:
-        return Response({"error": "Access denied for this institute"},status=403)
+    membership = Membership.objects.filter(
+        user=user,
+        institute__slug=slug
+    ).select_related('institute').first()
+
+    if not membership:
+        return Response(
+            {"error": "Access denied for this institute"},
+            status=403
+            )
+    
     
     # Generate JWT
     refresh = RefreshToken.for_user(user)

@@ -23,6 +23,9 @@ class Institute(models.Model):
         return f'{self.name}'
 
 
+
+
+
 class Membership(models.Model):
     ROLE_CHOICES = (
         ('admin', 'Admin'),
@@ -39,6 +42,8 @@ class Membership(models.Model):
     
     def __str__(self):
         return f'{self.institute}-{self.user}'
+
+
 
 
 class PasswordResetOTP(models.Model):
