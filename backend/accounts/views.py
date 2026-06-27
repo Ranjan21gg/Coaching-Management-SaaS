@@ -183,6 +183,11 @@ def send_otp(request):
         otp=otp,
         expires_at=timezone.now() + timedelta(minutes=5)
     )
+    
+    print("EMAIL_HOST:", settings.EMAIL_HOST)
+    print("EMAIL_PORT:", settings.EMAIL_PORT)
+    print("EMAIL_HOST_USER:", settings.EMAIL_HOST_USER)
+    print("PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
     send_mail(
     "Password Reset OTP",
@@ -190,7 +195,7 @@ def send_otp(request):
     settings.EMAIL_HOST_USER,
     [email],
     fail_silently=False,
-)
+    )
 
     return Response({
         "message": "OTP sent successfully"
