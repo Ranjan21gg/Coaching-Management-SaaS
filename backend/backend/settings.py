@@ -111,8 +111,9 @@ CORS_ALLOWED_ORIGIN_REGEXES = sorted(set(config_csv(
 # email set up for forget passoword
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = config("EMAIL_HOST", default="smtp-relay.brevo.com")
-EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
-EMAIL_USE_TLS = True
+EMAIL_PORT = config("EMAIL_PORT", default=465, cast=int)
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 # SMTP login (provided by Brevo)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
