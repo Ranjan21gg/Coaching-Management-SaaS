@@ -114,8 +114,12 @@ EMAIL_HOST = config("EMAIL_HOST", default="smtp-relay.brevo.com")
 EMAIL_PORT = config("EMAIL_PORT", default=587, cast=int)
 EMAIL_USE_TLS = True
 
+# SMTP login (provided by Brevo)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+# Verified sender in Brevo
+DEFAULT_FROM_EMAIL = "sahoolegecy@gmail.com"
 
 # Subscription setup
 RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="")

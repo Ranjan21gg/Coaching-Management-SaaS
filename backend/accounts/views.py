@@ -12,6 +12,8 @@ import random
 from .utils import send_mail
 from .models import Institute, Membership, PasswordResetOTP
 from django.conf import settings
+import traceback
+
 
 from datetime import timedelta
 from django.utils import timezone
@@ -198,18 +200,17 @@ def send_otp(request):
         send_mail(
             subject="Password Reset OTP",
             message=f"Your OTP is {otp}",
-            from_email=settings.EMAIL_HOST_USER,
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[email],
             fail_silently=False,
             connection=connection,
         )
 
+
     except Exception as e:
-        print("EMAIL ERROR:", str(e))
-        return Response(
-            {"error": "Email sending failed"},
-            status=500
-        )
+        print("EMAIL ERROR:", repr(e))
+        traceback.print_exc()
+        return Response({"error": str(e)}, status=500)
 
     return Response({
         "message": "OTP sent successfully"
