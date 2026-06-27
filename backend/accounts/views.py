@@ -158,7 +158,6 @@ def send_otp(request):
             user__username=username,
             institute=institute
         )
-
         user = membership.user
 
     except (Institute.DoesNotExist, Membership.DoesNotExist):
@@ -173,6 +172,7 @@ def send_otp(request):
             status=400
         )
 
+    # ✅ OTP must be created before email
     otp = str(random.randint(100000, 999999))
 
     print("OTP:", otp)
@@ -183,31 +183,37 @@ def send_otp(request):
         otp=otp,
         expires_at=timezone.now() + timedelta(minutes=5)
     )
-    
+
     print("EMAIL_HOST:", settings.EMAIL_HOST)
     print("EMAIL_PORT:", settings.EMAIL_PORT)
     print("EMAIL_HOST_USER:", settings.EMAIL_HOST_USER)
     print("PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
-    from django.core.mail import get_connection
+    from django.core.mail import get_connection, send_mail
 
-    connection = get_connection(fail_silently=False)
-    connection.timeout = 10
+    try:
+        connection = get_connection(fail_silently=False)
+        connection.timeout = 10
 
+        send_mail(
+            subject="Password Reset OTP",
+            message=f"Your OTP is {otp}",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[email],
+            fail_silently=False,
+            connection=connection,
+        )
 
-    send_mail(
-    "Password Reset OTP",
-    f"Your OTP is {otp}",
-    settings.EMAIL_HOST_USER,
-    [email],
-    fail_silently=False,
-    connection=connection,
-    )
+    except Exception as e:
+        print("EMAIL ERROR:", str(e))
+        return Response(
+            {"error": "Email sending failed"},
+            status=500
+        )
 
     return Response({
         "message": "OTP sent successfully"
     })
-
 
 
 @api_view(['POST'])
