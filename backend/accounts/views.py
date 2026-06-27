@@ -189,12 +189,19 @@ def send_otp(request):
     print("EMAIL_HOST_USER:", settings.EMAIL_HOST_USER)
     print("PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
+    from django.core.mail import get_connection
+
+    connection = get_connection(fail_silently=False)
+    connection.timeout = 10
+
+
     send_mail(
     "Password Reset OTP",
     f"Your OTP is {otp}",
     settings.EMAIL_HOST_USER,
     [email],
     fail_silently=False,
+    connection=connection,
     )
 
     return Response({
