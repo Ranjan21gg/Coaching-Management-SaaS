@@ -15,7 +15,6 @@ from decouple import config
 from datetime import timedelta
 
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +51,7 @@ DEBUG = config_bool("DEBUG")
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in config('ALLOWED_HOSTS', default="*").split(',')
+    for host in config("ALLOWED_HOSTS", default="").split(",")
     if host.strip()
 ]
 
@@ -108,19 +107,29 @@ CORS_ALLOWED_ORIGIN_REGEXES = sorted(set(config_csv(
     r"^http://127\.0\.0\.1:\d+$",
 ]))
 
-# email set up for forget passoword
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config("EMAIL_HOST", default="smtp-relay.brevo.com")
-EMAIL_PORT = config("EMAIL_PORT", default=465, cast=int)
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT"))
 
 # SMTP login (provided by Brevo)
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 # Verified sender in Brevo
-DEFAULT_FROM_EMAIL = "sahoolegecy@gmail.com"
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+
+
+
 
 # Subscription setup
 RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID", default="")
@@ -174,9 +183,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 import os
 import dj_database_url
-from dotenv import load_dotenv
 
-load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 

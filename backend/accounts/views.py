@@ -10,6 +10,7 @@ from django.utils.text import slugify
 # Imports for forget passoword
 import random
 from .utils import send_mail
+from utils.email import send_otp_email
 from .models import Institute, Membership, PasswordResetOTP
 from django.conf import settings
 import traceback
@@ -146,6 +147,7 @@ def send_otp(request):
     institute_name = request.data.get("institute_name")
     email = request.data.get("email")
 
+    # Error setup for credentials validations
     if not username or not institute_name or not email:
         return Response(
             {"error": "All fields required"},
@@ -191,30 +193,37 @@ def send_otp(request):
     print("EMAIL_HOST_USER:", settings.EMAIL_HOST_USER)
     print("PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
 
-    from django.core.mail import get_connection, send_mail
 
     try:
-        connection = get_connection(fail_silently=False)
-        connection.timeout = 10
-
         send_mail(
-            subject="Password Reset OTP",
+            subject="InstiFlow Password Reset",
             message=f"Your OTP is {otp}",
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[email],
+            recipient_list=[user.email],
             fail_silently=False,
-            connection=connection,
         )
 
+        return Response(
+               {"message": "OTP sent successfully"},
+                status=200
+        )
 
     except Exception as e:
-        print("EMAIL ERROR:", repr(e))
-        traceback.print_exc()
-        return Response({"error": str(e)}, status=500)
+            return Response(
+        {"error": str(e)},
+        status=500
+    )
 
-    return Response({
-        "message": "OTP sent successfully"
-    })
+    
+    # try:
+    #     send_otp_email(email, otp)
+    # except Exception as e:
+    #     print("EMAIL ERROR:", repr(e))
+    #     return Response({"error": str(e)}, status=500)
+
+    # return Response({
+    #     "message": "OTP sent successfully"
+    # })
 
 
 @api_view(['POST'])
