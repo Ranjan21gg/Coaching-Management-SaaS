@@ -10,7 +10,10 @@ from django.utils.text import slugify
 # Imports for forget passoword
 import random
 from .utils import send_mail
-from utils.email import send_otp_email
+# from utils.email import send_otp_email
+from .emails import send_otp_email
+import traceback
+
 from .models import Institute, Membership, PasswordResetOTP
 from django.conf import settings
 import traceback
@@ -192,38 +195,44 @@ def send_otp(request):
     print("EMAIL_PORT:", settings.EMAIL_PORT)
     print("EMAIL_HOST_USER:", settings.EMAIL_HOST_USER)
     print("PASSWORD EXISTS:", bool(settings.EMAIL_HOST_PASSWORD))
-
+    print("BREVO API KEY EXISTS:", bool(settings.BREVO_API_KEY))
 
     try:
-        send_mail(
-            subject="InstiFlow Password Reset",
-            message=f"Your OTP is {otp}",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user.email],
-            fail_silently=False,
-        )
+          send_otp_email(request.data["email"], otp)
+          return Response(
+               {"message": "OTP sent"}
+               )
 
-        return Response(
-               {"message": "OTP sent successfully"},
-                status=200
-        )
 
     except Exception as e:
-            return Response(
-        {"error": str(e)},
-        status=500
-    )
+         traceback.print_exc()
+         print("EMAIL ERROR:", repr(e))
 
-    
+         return Response(
+                {"error": str(e)},
+                 status=500
+               )
+
     # try:
-    #     send_otp_email(email, otp)
-    # except Exception as e:
-    #     print("EMAIL ERROR:", repr(e))
-    #     return Response({"error": str(e)}, status=500)
+    #     send_mail(
+    #         subject="InstiFlow Password Reset",
+    #         message=f"Your OTP is {otp}",
+    #         from_email=settings.DEFAULT_FROM_EMAIL,
+    #         recipient_list=[user.email],
+    #         fail_silently=False,
+    #     )
 
-    # return Response({
-    #     "message": "OTP sent successfully"
-    # })
+    #     return Response(
+    #            {"message": "OTP sent successfully"},
+    #             status=200
+    #     )
+
+    # except Exception as e:
+    #         return Response(
+    #     {"error": str(e)},
+    #     status=500
+    # )
+    
 
 
 @api_view(['POST'])
