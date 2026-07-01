@@ -17,7 +17,7 @@ export default function VerifyOTP() {
     const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
-    const [timer, setTimer] = useState(5)
+    const [timer, setTimer] = useState(30)
     const [success, setSuccess] = useState(false);
     // const [otpSent, setOtpSent] = useState(false);
     const showMessage = (msg) => {
@@ -85,7 +85,6 @@ export default function VerifyOTP() {
             showMessage("OTP resent successfully");
 
         } catch (err) {
-
             setSuccess(false);
 
             showMessage(

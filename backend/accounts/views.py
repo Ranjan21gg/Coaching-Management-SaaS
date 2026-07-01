@@ -9,10 +9,8 @@ from django.utils.text import slugify
 
 # Imports for forget passoword
 import random
-from .utils import send_mail
 # from utils.email import send_otp_email
 from .emails import send_otp_email
-import traceback
 
 from .models import Institute, Membership, PasswordResetOTP
 from django.conf import settings
@@ -203,7 +201,6 @@ def send_otp(request):
                {"message": "OTP sent"}
                )
 
-
     except Exception as e:
          traceback.print_exc()
          print("EMAIL ERROR:", repr(e))
@@ -212,27 +209,6 @@ def send_otp(request):
                 {"error": str(e)},
                  status=500
                )
-
-    # try:
-    #     send_mail(
-    #         subject="InstiFlow Password Reset",
-    #         message=f"Your OTP is {otp}",
-    #         from_email=settings.DEFAULT_FROM_EMAIL,
-    #         recipient_list=[user.email],
-    #         fail_silently=False,
-    #     )
-
-    #     return Response(
-    #            {"message": "OTP sent successfully"},
-    #             status=200
-    #     )
-
-    # except Exception as e:
-    #         return Response(
-    #     {"error": str(e)},
-    #     status=500
-    # )
-    
 
 
 @api_view(['POST'])
@@ -291,35 +267,6 @@ def verify_otp(request):
     return Response({
         "message": "Password reset successful"
     })
-
-
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def verify_otp(request):
-    # username = request.data.get("username")
-    # otp = request.data.get("otp")
-    # new_password = request.data.get("new_password")
-
-    # try:
-    #     user = User.objects.get(username=username)
-    #     otp_obj = PasswordResetOTP.objects.filter(
-    #         user=user,
-    #         otp=otp
-    #     ).latest("created_at")
-
-    # except Exception:
-    #     return Response(
-    #         {"error": "Invalid OTP"},
-    #         status=400
-    #     )
-
-    # user.password = make_password(new_password)
-    # user.save()
-    # otp_obj.delete()
-
-    # return Response({
-    #     "message": "Password reset successful"
-    # })
 
 
 @api_view(['POST'])
