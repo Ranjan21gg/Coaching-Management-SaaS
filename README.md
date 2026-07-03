@@ -1,3 +1,101 @@
+<p align="center">
+
+<img src="assets/logo.png">
+
+</p>
+
+
+## Login
+
+![](assets/demo/login.gif)
+
+---
+
+## Dashboard
+
+![](assets/demo/dashboard.gif)
+
+---
+
+## Student Management
+
+![](assets/demo/students.gif)
+
+
+```mermaid
+graph TD
+
+A[React Frontend]
+
+B[Axios]
+
+C[Django REST API]
+
+D[JWT Authentication]
+
+E[PostgreSQL]
+
+A --> B
+
+B --> C
+
+C --> D
+
+D --> E
+```
+
+
+```mermaid
+erDiagram
+
+USER ||--o{ STUDENT : manages
+
+INSTITUTE ||--o{ USER : has
+
+INSTITUTE ||--o{ STUDENT : owns
+
+STUDENT ||--o{ ATTENDANCE : has
+
+ATTENDANCE {
+
+int id
+
+date date
+
+bool present
+
+}
+
+STUDENT {
+
+int id
+
+string name
+
+string email
+
+}
+
+USER {
+
+int id
+
+string username
+
+}
+
+INSTITUTE {
+
+int id
+
+string name
+
+}
+```
+
+
+
+
 # InstiFlow – Multi-Tenant Coaching Management SaaS
 
 InstiFlow is a **production-ready, multi-tenant Coaching Management SaaS** built to help coaching institutes digitize and automate their day-to-day operations. The platform provides secure authentication, student management, attendance tracking, and institute-specific data isolation, allowing multiple coaching centers to use the same application while keeping their data completely separate.
