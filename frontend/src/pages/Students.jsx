@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
 
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ export default function Students() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    API.get("students/")
+    privateAPI.get("students/")
       .then((res) => setStudents(res.data));
   }, []);
 

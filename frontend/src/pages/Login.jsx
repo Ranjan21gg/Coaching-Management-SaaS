@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";
+import publicAPI from "../publicapi";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -21,7 +21,7 @@ export default function Login() {
 
     try {
       // LOGIN API CALL
-      const res = await API.post("/login/", data);
+      const res = await publicAPI.post("/login/", data);
 
       // RESPONSE DATA
       const userData = res.data;

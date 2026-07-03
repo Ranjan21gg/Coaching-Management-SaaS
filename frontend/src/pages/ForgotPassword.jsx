@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";
+import publicAPI from "../publicapi";
 import { useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {
@@ -23,7 +23,7 @@ export default function ForgotPassword() {
         setLoading(true);
 
         try {
-            const res = await API.post("/send-otp/", formData);
+            const res = await publicAPI.post("/send-otp/", formData);
             setMessage(res.data.message);
 
             // Go to verify page

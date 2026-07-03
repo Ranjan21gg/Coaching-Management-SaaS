@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import API from "../api";
+import publicAPI from "../publicapi";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function VerifyOTP() {
@@ -45,7 +45,7 @@ export default function VerifyOTP() {
         setLoading(true);
 
         try {
-            const res = await API.post("/verify-otp/",
+            const res = await publicAPI.post("/verify-otp/",
                 {
                     username,
                     otp,

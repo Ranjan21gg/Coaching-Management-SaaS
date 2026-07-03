@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";
+import publicAPI from "../publicapi";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -21,7 +21,7 @@ export default function Register() {
     setMessage("");
 
     try {
-      await API.post("/register/", data);
+      await publicAPI.post("/register/", data);
       setMessage("Registration successful");
       setisError(true)
 
