@@ -70,7 +70,7 @@ def register(request):
     Membership.objects.create(
         user=user,
         institute=institute,
-        defaults={"role": "admin"}
+        role = "admin",
     )
 
     return Response({"msg": "User + Institute created Successfully"})
