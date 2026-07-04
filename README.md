@@ -1,55 +1,91 @@
 <p align="center">
 
-<img src="frontend/assets/logo.png">
+<img src="assets/pngs/logo.png">
 
 </p>
 
+```InstiFlow
 
-## Login
+Production-Ready Multi-Tenant Coaching Management SaaS
 
-![](assets/demo/login.gif)
+Securely manage students, attendance, and institute operations with a scalable cloud-based platform.
+
+React • Django REST Framework • PostgreSQL • JWT Authentication
+```
+
+
+# 📸 Application Preview
+
+---
+
+## 🔐 Login
+
+<p align="center">
+  <img src="assets/gifs/login.gif" alt="Login Demo" width="900">
+</p>
+
+The login flow uses **JWT authentication with HTTP-only cookies** for enhanced security.
+
+---
+
+## 📊 Dashboard
+
+<p align="center">
+  <img src="assets/gifs/dashboard.gif" alt="Dashboard Demo" width="900">
+</p>
+
+The dashboard provides administrators with a centralized overview of institute operations.
 
 ---
 
 ## 👨‍🎓 Student Management
 
 <p align="center">
-  <img src="assets/screenshots/Add-Student.gif" width="900">
+  <img src="assets/gifs/Add-Student.gif" alt="Student Management Demo" width="900">
 </p>
+
+Administrators can add, update, search, and manage student records efficiently.
 
 ---
 
-## 📅 Attendance
+## 📅 Attendance Management
 
 <p align="center">
-  <img src="assets/screenshots/Attendance.gif" width="900">
+  <img src="assets/gifs/Attendance.gif" alt="Attendance Demo" width="900">
 </p>
+
+Attendance tracking allows institutes to maintain accurate daily records.
 
 ---
 
-## 📅 Fee Management
+## 📅 Attendance Management
 
 <p align="center">
-  <img src="assets/screenshots/Fee.gif" width="900">
+  <img src="assets/gifs/Fee.gif" alt="Fee Demo" width="900">
 </p>
+
+Fee tracking allows institutes to maintain accurate Dues.
 
 ---
 
-## 📅 Forget-Password
+## 📅 Students Profile View
 
 <p align="center">
-  <img src="assets/screenshots/Forget-Password.gif" width="900">
+  <img src="assets/gifs/Profile.gif" alt="Students Profile View Demo" width="900">
 </p>
+
+Students Profile View tracking allows institutes to maintain accurate Data of the students.
 
 ---
 
-## 📅 Profile
+## 🔑 Password Reset
 
 <p align="center">
-  <img src="assets/screenshots/Profile.gif" width="900">
+  <img src="assets/gifs/Password-Reset.gif" alt="Password Reset Demo" width="900">
 </p>
 
----
+Users can securely reset their password using an OTP sent via email.
+
 
 
 ```mermaid
@@ -64,66 +100,7 @@ C[Django REST API]
 D[JWT Authentication]
 
 E[PostgreSQL]
-
-A --> B
-
-B --> C
-
-C --> D
-
-D --> E
 ```
-
-
-```mermaid
-erDiagram
-
-USER ||--o{ STUDENT : manages
-
-INSTITUTE ||--o{ USER : has
-
-INSTITUTE ||--o{ STUDENT : owns
-
-STUDENT ||--o{ ATTENDANCE : has
-
-ATTENDANCE {
-
-int id
-
-date date
-
-bool present
-
-}
-
-STUDENT {
-
-int id
-
-string name
-
-string email
-
-}
-
-USER {
-
-int id
-
-string username
-
-}
-
-INSTITUTE {
-
-int id
-
-string name
-
-}
-```
-
-
 
 
 # InstiFlow – Multi-Tenant Coaching Management SaaS
@@ -261,7 +238,7 @@ The platform automates administrative workflows and provides secure access for i
 
 ### Database
 
-- PostgreSQL
+- Supabase - PostgreSQL
 
 ---
 
