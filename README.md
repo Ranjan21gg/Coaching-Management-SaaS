@@ -12,8 +12,8 @@
 A production-ready <b>Multi-Tenant Coaching Management SaaS</b> built with <b>React</b>, <b>Django REST Framework</b>, and <b>PostgreSQL</b>, enabling coaching institutes to securely manage students, attendance, authentication, and institute operations from a centralized cloud platform.
 </p>
 
-##[🔗 Live Demo](https://instiflow-three.vercel.app/)
-<p align="center">
+##[🌐 Live Demo](https://instiflow-three.vercel.app/)
+<p>
 <a href="https://portfolio-ranjan.vercel.app">💼 Portfolio</a>
 &nbsp; | &nbsp;
 </p>
