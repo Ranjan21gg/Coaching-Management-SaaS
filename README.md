@@ -58,7 +58,7 @@ Attendance tracking allows institutes to maintain accurate daily records.
 
 ---
 
-## 📅 Attendance Management
+## 📅 Fee Management
 
 <p align="center">
   <img src="assets/gifs/Fee.gif" alt="Fee Demo" width="900">
@@ -107,11 +107,13 @@ C --> D
 D --> E
 ```
 
+---
 
 # InstiFlow – Multi-Tenant Coaching Management SaaS
 
 InstiFlow is a **production-ready, multi-tenant Coaching Management SaaS** built to help coaching institutes digitize and automate their day-to-day operations. The platform provides secure authentication, student management, attendance tracking, and institute-specific data isolation, allowing multiple coaching centers to use the same application while keeping their data completely separate.
 
+---
 
 ## 📌 Problem Statement
 
@@ -125,6 +127,7 @@ This leads to:
 - ❌ Difficult scaling as institutes grow
 - ❌ Lack of secure access control
 
+---
 
 ## 💡 Solution
 
@@ -134,6 +137,7 @@ Each institute gets its own isolated workspace while sharing the same applicatio
 
 The platform automates administrative workflows and provides secure access for institute administrators.
 
+---
 
 # ✨ Features
 
@@ -147,6 +151,7 @@ The platform automates administrative workflows and provides secure access for i
 - Protected APIs
 - Role-Based Authorization
 
+---
 
 ## 🔒 Password Recovery
 
@@ -154,6 +159,8 @@ The platform automates administrative workflows and provides secure access for i
 - Email Verification
 - Secure OTP Validation
 - Password Update
+
+---
 
 ## 👨‍🎓 Student Management
 
@@ -163,12 +170,21 @@ The platform automates administrative workflows and provides secure access for i
 - Search Students
 - Institute-wise Student Isolation
 
+---
 
 ## 📅 Attendance Management
 
 - Mark Attendance
 - View Attendance Records
 - Student-wise Attendance History
+
+---
+
+## 💰 Fee Management
+
+- Record Fee Payments
+- Track Payment Status
+- View Student-wise Fee History
 
 ---
 
@@ -214,12 +230,16 @@ The platform automates administrative workflows and provides secure access for i
 
 ## Authentication & Security
 
-- JWT Access Tokens
-- Refresh Tokens
-- HTTP-Only Cookies
-- CORS Configuration
-- CSRF Protection
-- Secure Password Hashing
+# 🔒 Security Features
+
+- JWT Authentication** for secure user authentication
+- HTTP-only Cookies** to securely store access and refresh tokens
+- Refresh Token Rotation** for seamless and secure session management
+- Password Hashing** using Django's built-in password hashing mechanisms
+- Role-Based Authorization** to restrict access based on user roles
+- OTP-based Password Reset** with email verification
+- CORS Configuration** for secure frontend-backend communication
+- Environment Variables** for managing sensitive configuration and secrets
 
 ---
 
@@ -388,19 +408,6 @@ FRONTEND_URL=
 ```env
 VITE_API_URL=
 ```
-
----
-
-# 📸 Screenshots
-
-> Add screenshots of:
-
-- Login Page
-- Dashboard
-- Student Management
-- Attendance Module
-- Password Reset
-- Responsive Mobile View
 
 ---
 
