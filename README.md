@@ -4,15 +4,21 @@
 
 </p>
 
-```InstiFlow
+<h1 align="center">
+  InstiFlow
+</h1>
 
-Production-Ready Multi-Tenant Coaching Management SaaS
+<p align="center">
+A production-ready <b>Multi-Tenant Coaching Management SaaS</b> built with <b>React</b>, <b>Django REST Framework</b>, and <b>PostgreSQL</b>, enabling coaching institutes to securely manage students, attendance, authentication, and institute operations from a centralized cloud platform.
+</p>
 
-Securely manage students, attendance, and institute operations with a scalable cloud-based platform.
-
-React • Django REST Framework • PostgreSQL • JWT Authentication
-```
-
+<p align="center">
+<a href="https://instiflow-three.vercel.app/">🌐 Live Demo</a>
+&nbsp; | &nbsp;
+<a href="https://portfolio-ranjan.vercel.app">💼 Portfolio</a>
+&nbsp; | &nbsp;
+## [🔗 Live Demo](https://portfolio-ranjan.vercel.app/)
+</p>
 
 # 📸 Application Preview
 
@@ -85,8 +91,6 @@ Students Profile View tracking allows institutes to maintain accurate Data of th
 </p>
 
 Users can securely reset their password using an OTP sent via email.
-
-
 
 ```mermaid
 graph TD
@@ -232,14 +236,14 @@ The platform automates administrative workflows and provides secure access for i
 
 # 🔒 Security Features
 
-- JWT Authentication** for secure user authentication
-- HTTP-only Cookies** to securely store access and refresh tokens
-- Refresh Token Rotation** for seamless and secure session management
-- Password Hashing** using Django's built-in password hashing mechanisms
-- Role-Based Authorization** to restrict access based on user roles
-- OTP-based Password Reset** with email verification
-- CORS Configuration** for secure frontend-backend communication
-- Environment Variables** for managing sensitive configuration and secrets
+- JWT Authentication\*\* for secure user authentication
+- HTTP-only Cookies\*\* to securely store access and refresh tokens
+- Refresh Token Rotation\*\* for seamless and secure session management
+- Password Hashing\*\* using Django's built-in password hashing mechanisms
+- Role-Based Authorization\*\* to restrict access based on user roles
+- OTP-based Password Reset\*\* with email verification
+- CORS Configuration\*\* for secure frontend-backend communication
+- Environment Variables\*\* for managing sensitive configuration and secrets
 
 ---
 
@@ -285,7 +289,6 @@ The platform automates administrative workflows and provides secure access for i
                      │
         Multi-Tenant Data Isolation
 ```
-
 
 # 🔥 Key Highlights
 
