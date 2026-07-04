@@ -1,11 +1,11 @@
 // src/pages/Subscribe.js
 
-import API from "../../api";
+import privateAPI from "../privateapi";
 
 export default function Subscribe() {
 
   const handleSubscribe = async () => {
-    const res = await API.post("create-subscription/");
+    const res = await privateAPI.post("create-subscription/");
 
     const options = {
       key: "rzp_test_xxx",

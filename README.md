@@ -21,7 +21,7 @@ React • Django REST Framework • PostgreSQL • JWT Authentication
 ## 🔐 Login
 
 <p align="center">
-  <img src="assets/gifs/login.gif" alt="Login Demo" width="900">
+  <img src="assets/gifs/Login.gif" alt="Login Demo" width="900">
 </p>
 
 The login flow uses **JWT authentication with HTTP-only cookies** for enhanced security.
