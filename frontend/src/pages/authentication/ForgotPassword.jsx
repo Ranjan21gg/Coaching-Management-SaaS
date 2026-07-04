@@ -1,5 +1,5 @@
 import { useState } from "react";
-import publicAPI from "../publicapi";
+import publicAPI from "../../publicapi";
 import { useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {

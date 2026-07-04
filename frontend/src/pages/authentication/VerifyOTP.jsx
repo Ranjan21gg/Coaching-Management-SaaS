@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import publicAPI from "../publicapi";
+import publicAPI from "../../publicapi";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function VerifyOTP() {
