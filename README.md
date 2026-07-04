@@ -100,6 +100,11 @@ C[Django REST API]
 D[JWT Authentication]
 
 E[PostgreSQL]
+
+A --> B
+B --> C
+C --> D
+D --> E
 ```
 
 
@@ -262,30 +267,6 @@ The platform automates administrative workflows and provides secure access for i
 ```
 
 
-# 📂 Project Structure
-
-```
-InstiFlow
-│
-├── frontend
-│   ├── src
-│   ├── components
-│   ├── pages
-│   ├── context
-│   └── services
-│
-├── backend
-│   ├── accounts
-│   ├── students
-│   ├── attendance
-│   ├── config
-│   └── requirements.txt
-│
-└── README.md
-```
-
----
-
 # 🔥 Key Highlights
 
 - ✅ Production-ready architecture
@@ -437,7 +418,7 @@ Contributions are welcome!
 
 # 👨‍💻 Author
 
-**Ranjan Kumar**
+**Ranjan Kumar Sahoo**
 
 Full Stack Developer
 
