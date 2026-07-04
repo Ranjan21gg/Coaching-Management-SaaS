@@ -11,15 +11,45 @@
 
 ---
 
-## Dashboard
+## 👨‍🎓 Student Management
 
-![](assets/demo/dashboard.gif)
+<p align="center">
+  <img src="assets/screenshots/Add-Student.gif" width="900">
+</p>
 
 ---
 
-## Student Management
+## 📅 Attendance
 
-![](assets/demo/students.gif)
+<p align="center">
+  <img src="assets/screenshots/Attendance.gif" width="900">
+</p>
+
+---
+
+## 📅 Fee Management
+
+<p align="center">
+  <img src="assets/screenshots/Fee.gif" width="900">
+</p>
+
+---
+
+## 📅 Forget-Password
+
+<p align="center">
+  <img src="assets/screenshots/Forget-Password.gif" width="900">
+</p>
+
+---
+
+## 📅 Profile
+
+<p align="center">
+  <img src="assets/screenshots/Profile.gif" width="900">
+</p>
+
+---
 
 
 ```mermaid
