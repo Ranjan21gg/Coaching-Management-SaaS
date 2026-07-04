@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
 
 export default function Dashboard() {
   const [students, setStudents] = useState([]);
@@ -11,9 +11,9 @@ export default function Dashboard() {
     let isActive = true;
 
     Promise.all([
-      API.get("students/"),
-      API.get("fees/"),
-      API.get("attendance/"),
+      privateAPI.get("students/"),
+      privateAPI.get("fees/"),
+      privateAPI.get("attendance/"),
     ])
       .then(([studentRes, feeRes, attendanceRes]) => {
         if (!isActive) return;

@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
 
 const getAttendance = async () => {
-  const res = await API.get("attendance/");
+  const res = await privateAPI.get("attendance/");
   return res.data;
 };
 
 const getStudents = async () => {
-  const res = await API.get("students/");
+  const res = await privateAPI.get("students/");
   return res.data;
 };
 
@@ -56,10 +56,10 @@ export default function Attendance() {
     };
 
     if (editingId) {
-      await API.put(`attendance/${editingId}/`, payload);
+      await privateAPI.put(`attendance/${editingId}/`, payload);
       setEditingId(null);
     } else {
-      await API.post("attendance/", payload);
+      await privateAPI.post("attendance/", payload);
     }
 
     setForm({
@@ -85,7 +85,7 @@ export default function Attendance() {
 
   // Delete attendance
   const handleDelete = async (id) => {
-    await API.delete(`attendance/${id}/`);
+    await privateAPI.delete(`attendance/${id}/`);
     fetchAttendance();
   };
 

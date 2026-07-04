@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
+
 
 export default function StudentProfile() {
   const { id } = useParams();
@@ -14,9 +15,9 @@ export default function StudentProfile() {
     let isActive = true;
 
     Promise.all([
-      API.get(`students/${id}/`),
-      API.get(`fees/?student=${id}`),
-      API.get(`attendance/?student=${id}`),
+      privateAPI.get(`students/${id}/`),
+      privateAPI.get(`fees/?student=${id}`),
+      privateAPI.get(`attendance/?student=${id}`),
     ])
       .then(([studentRes, feeRes, attRes]) => {
         if (!isActive) return;
@@ -28,6 +29,8 @@ export default function StudentProfile() {
         console.log(err);
         alert("Error loading data");
       });
+
+      
 
     return () => {
       isActive = false;

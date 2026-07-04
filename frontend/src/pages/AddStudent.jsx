@@ -1,5 +1,5 @@
 import { useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
 import { useNavigate } from "react-router-dom";
 
 export default function AddStudent() {
@@ -12,7 +12,7 @@ export default function AddStudent() {
   const navigate = useNavigate();
 
   const addStudent = async () => {
-    await API.post("students/", data);
+    await privateAPI.post("students/", data);
     navigate("/students");
   };
 

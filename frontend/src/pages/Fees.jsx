@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
-import API from "../api";
+import privateAPI from "../privateapi";
+
 
 const getFees = async () => {
-  const res = await API.get("fees/");
+  const res = await privateAPI.get("fees/");
   return res.data;
 };
 
 const getStudents = async () => {
-  const res = await API.get("students/");
+  const res = await privateAPI.get("students/");
   return res.data;
 };
 
@@ -45,10 +46,10 @@ export default function Fees() {
 
   const handleSubmit = async () => {
     if (editingId) {
-      await API.put(`fees/${editingId}/`, form);
+      await privateAPI.put(`fees/${editingId}/`, form);
       setEditingId(null);
     } else {
-      await API.post("fees/", form);
+      await privateAPI.post("fees/", form);
     }
 
     setForm({
@@ -74,7 +75,7 @@ export default function Fees() {
   };
 
   const handleDelete = async (id) => {
-    await API.delete(`fees/${id}/`);
+    await privateAPI.delete(`fees/${id}/`);
     fetchFees();
   };
 
