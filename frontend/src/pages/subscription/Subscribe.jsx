@@ -1,6 +1,6 @@
 // src/pages/Subscribe.js
 
-import privateAPI from "../privateapi";
+import privateAPI from "../../privateapi";
 
 export default function Subscribe() {
 
