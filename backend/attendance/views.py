@@ -17,9 +17,16 @@ class AttendanceViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Attendance.objects.filter(
+        queryset = Attendance.objects.filter(
             institute_id=self.request.institute_id
         )
+        student_id = self.request.query_params.get("student")
+
+        if student_id:
+            queryset = queryset.filter(student_id=student_id)
+            
+        return queryset.order_by("-date","-created_at","-updated_at")
+    
 
     def perform_create(self, serializer):
         serializer.save(

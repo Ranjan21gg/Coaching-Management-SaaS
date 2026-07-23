@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
 import privateAPI from "../privateapi";
+import StatCard from "../components/card/StartCard";
+import Header from "../components/Header";
+import GlowBG from "../components/backgroundglow/GlowBG"
+import { Link } from "react-router-dom";
+import {
+  FaUserGraduate,
+  FaMoneyBillWave,
+  FaClipboardCheck,
+  FaExclamationTriangle,
+  FaArrowRight,
+} from "react-icons/fa";
+import { filterAttendance } from "../components/attendance/AttendanceFilters";
+
 
 export default function Dashboard() {
   const [students, setStudents] = useState([]);
@@ -34,45 +47,128 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="flex flex-col h-full p-4 overflow-y-auto bg-gray-900  dark:bg-blue-200 text-white  dark:text-black">
-      <h1 className="z-40 text-2xl font-bold mb-2">Dashboard</h1>
+    <div className="min-h-screen bg-gray-900 dark:bg-blue-200
+     text-white dark:text-black relative overflow-hidden">
 
-      {/* cards */}
-      <div className="relative z-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Background Glow */}
+      <GlowBG />
+      <div className="relative z-10 p-6">
 
-        <div className="bg-blue-500 text-white  dark:text-black  p-6 rounded-xl shadow">
-          <h2 className="text-xl font-bold">Students</h2>
-          <p className="text-4xl font-bold">{students.length}</p>
-          <p className="text-s mt-2 opacity-80">
-            Total registered students
-          </p>
+        {/* Header */}
+        <Header
+          Title={"Dashboard"}
+          Description={"Welcome back! Here's what's happening in your institute today."}
+          Records={`Present : ${filterAttendance.length} / ${students.length}`}
+        />
+
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          {/* Students */}
+
+          <StatCard
+            title="Students"
+            value={students.length}
+            iconColor="bg-blue-500"
+            icon={<FaUserGraduate />}
+            description="Total registered students"
+          />
+
+
+          {/* Fees */}
+
+          <StatCard
+            title="Fee Records"
+            value={fees.length}
+            iconColor="bg-green-500"
+            icon={<FaMoneyBillWave />}
+            description={"Payments recorded"}
+          />
+
+          {/* Pending */}
+
+          <StatCard
+            title="Pending Fees"
+            value={totalPendingFees}
+            iconColor="bg-yellow-500"
+            icon={<FaExclamationTriangle />}
+            description="Amount yet to be collected"
+          />
+
+          {/* Attendance */}
+
+          <StatCard
+            title="Attendance"
+            value={attendance.length}
+            iconColor="bg-purple-500"
+            icon={<FaClipboardCheck />}
+            description="Attendance entries"
+          />
+
         </div>
 
-        <div className="bg-green-500 text-white  dark:text-black  p-6 rounded-xl shadow">
-          <h2 className="text-xl font-bold">Fee Records</h2>
-          <p className="text-4xl font-bold">{fees.length}</p>
-          <p className="text-s mt-2 opacity-80">
-            Payments recorded so far
-          </p>
-        </div>
+        {/* Bottom Section */}
 
-        <div className="bg-yellow-500 text-white  dark:text-black  p-6 rounded-xl shadow">
-          <h2 className="text-xl font-bold">Pending Fees</h2>
-          <p className="text-4xl font-bold">₹{totalPendingFees}</p>
-          <p className="text-s mt-2 opacity-80">
-            Amount yet to be collected
-          </p>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-6 mt-8">
 
-        <div className="bg-purple-500 text-white  dark:text-black  p-6 rounded-xl shadow">
-          <h2 className="text-xl font-bold">Attendance</h2>
-          <p className="text-4xl font-bold">{attendance.length}</p>
-          <p className="text-s mt-2 opacity-80">
-            Total attendance entries
-          </p>
+          {/* Institute Overview */}
+
+          <div className="bg-gray-800/80 dark:bg-white
+           backdrop-blur-xl border border-blue-700 rounded-2xl p-6">
+
+            <h2 className="text-2xl font-bold mb-4">
+              Institute Overview
+            </h2>
+
+            <p className="text-gray-400 leading-7">
+              Monitor your coaching institute from one place. Keep
+              track of student registrations, attendance records,
+              fee collections, and pending payments with a clean,
+              centralized dashboard.
+            </p>
+
+          </div>
+
+          {/* Quick Actions */}
+
+          <div className="bg-gray-800/80 dark:bg-white border border-blue-700 rounded-2xl p-6">
+
+            <h2 className="text-2xl font-bold mb-5">
+              Quick Actions
+            </h2>
+
+            <div className="space-y-4">
+
+              <Link
+                to={"/add-student"}
+                className="w-full flex justify-between items-center p-3 font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 transition">
+                Add Student
+                <FaArrowRight />
+              </Link>
+
+              <Link
+                to={"/fees"}
+                className="w-full flex justify-between items-center p-3 font-semibold rounded-xl bg-green-600 hover:bg-green-700 transition">
+                Record Fee
+                <FaArrowRight />
+              </Link>
+
+              <Link
+                to={"/attendance"}
+                className="w-full flex justify-between items-center p-3 font-semibold rounded-xl bg-purple-600 hover:bg-purple-700 transition">
+                Mark Attendance
+                <FaArrowRight />
+              </Link>
+
+            </div>
+
+          </div>
+
         </div>
 
       </div>
+
     </div>
   );
 }

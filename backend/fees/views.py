@@ -16,7 +16,7 @@ class FeeViewSet(ModelViewSet):
         if student_id:
             queryset = queryset.filter(student_id=student_id)
             
-        return queryset
+        return queryset.order_by("-date","-created_at","-updated_at")
 
     def perform_create(self, serializer):
         serializer.save(

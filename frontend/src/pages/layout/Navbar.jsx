@@ -9,6 +9,7 @@ import {
   Moon,
   Crown,
 } from "lucide-react";
+import { FaBuilding } from 'react-icons/fa'
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -32,66 +33,90 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky z-50 top-0 bg-gradient-to-r from-blue-700 to-indigo-700 text-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 py-1 gap-0 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 
+      border-b border-gray-700/50 bg-blue-800/60 backdrop-blur-xl
+      text-white dark:bg-blue-400/70 dark:border-blue-300">
 
-        <div className="flex items-center">
+      <div className="max-w-7xl mx-auto px-6 py-1 flex items-center justify-between">
+
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+
           <img
             src={logo}
             alt="InstiFlow"
-            className="h-10 md:h-10 w-auto object-contain"
+            className="h-11 w-auto"
           />
+
         </div>
 
-        <p className="text-[20px] font-semibold text-gray-200 dark:text-black">
-          {user.institute || "Institute"}
-        </p>
+        {/* Institute */}
 
-        {/* Menu */}
-        <div
-          className="flex flex-wrap items-center justify-end gap-1"
+        <div className="hidden md:flex items-center px-5 py-2 
+           rounded-full bg-gray-800 dark:bg-white 
+           border-2 border-blue-500 dark:border-blue-300">
 
-        >
+          <FaBuilding className="text-blue-300 pr-1" />
 
-          <div className="flex flex-wrap items-center justify-end gap-1 text-sm">
-            {/* Logged out */}
-            {/* {!isLoggedIn && (
-              <>
-                <Link to="/register" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                  <UserPlus size={18} /> Register
-                </Link>
+          <span className="text-sm font-semibold dark:text-black">
+            {user.institute || "Institute"}
+          </span>
 
-                <Link to="/" className="flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white hover:text-blue-700 text-sm">
-                  <LogIn size={18} /> Login
-                </Link>
-              </>
-            )} */}
+        </div>
 
+        {/* Right Side */}
 
-            <div>
-              {/* Premium */}
-              {!isSubscribed && (
-                <button
-                  onClick={() => navigate("/subscribe")}
-                  className="flex items-center gap-0 bg-yellow-500 text-black ml-0 mr-0 px-1 py-1 text-xs font-bold rounded-lg hover:bg-white hover:text-blue-700">
-                  <Crown size={20} />
-                  Premium Plan
-                </button>
-              )}
-            </div>
+        <div className="flex items-center gap-3">
 
-            {/* Theme */}
+          {/* Premium */}
+
+          {!isSubscribed && (
+
             <button
-              onClick={handleToggle}
-              className="px-2 py-1 rounded-lg"
-            >
-              {!isDark ? <Sun size={24} className="text-yellow-400 drop-shadow-md" /> : <Moon size={24} className="text-blue-300 drop-shadow-md" />}
+              onClick={() => navigate("/subscribe")}
+              className="flex items-center gap-2 rounded-xl bg-gradient-to-r
+                from-yellow-400 to-orange-400 px-4 py-2 text-sm font-semibold
+                text-black transition  hover:scale-95">
+
+              <Crown size={18} />
+
+              <span className="hidden md:block">
+
+                Upgrade
+
+              </span>
+
             </button>
-          </div>
+
+          )}
+
+          {/* Theme */}
+
+          <button
+            onClick={handleToggle}
+            className="h-9 w-10 rounded-xl flex items-center justify-center 
+             bg-gray-800 dark:bg-white border border-gray-700 dark:border-blue-300
+              transition"
+          >
+
+            {!isDark ? (
+              <Sun
+                size={22}
+                className="text-yellow-400 hover:scale-110"
+              />
+            ) : (
+              <Moon
+                size={22}
+                className="text-blue-500 hover:scale-110"
+              />
+            )}
+
+          </button>
 
         </div>
 
-      </div >
-    </nav >
+      </div>
+
+    </nav>
   );
 }

@@ -11,6 +11,10 @@ class Attendance(models.Model):
     date = models.DateField(auto_now_add=True)
     present = models.BooleanField(default=True)
 
+    # Record timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f"{self.institute.name},{self.student.name} - {self.date}"
     

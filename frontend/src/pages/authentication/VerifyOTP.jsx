@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import publicAPI from "../../publicapi";
+import GlowBG from "../../components/backgroundglow/GlowBG";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaLock, FaKey, FaRedo, FaCheckCircle } from "react-icons/fa";
 
 export default function VerifyOTP() {
     const location = useLocation();
@@ -56,7 +58,7 @@ export default function VerifyOTP() {
             showMessage(res.data.message);
 
             setTimeout(() => {
-                navigate("/");
+                navigate("/login");
             }, 1500);
 
         } catch (err) {
@@ -94,80 +96,141 @@ export default function VerifyOTP() {
     };
 
     return (
-        <div className="h-full flex items-center justify-center px-4 bg-gray-900 dark:bg-blue-200">
-            <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-4 rounded-2xl shadow-lg border border-gray-700">
-                <h1 className="text-2xl font-bold text-white dark:text-black text-center mb-4">
-                    Verify OTP
-                </h1>
-                <div className="space-y-3">
-                    <form
-                        onSubmit={handleSubmit}
-                        className="space-y-3"
-                    >
+        <>
+            <div className="relative min-h-screen bg-gray-900 dark:bg-blue-200 overflow-hidden">
 
-                        <input
-                            type="text"
-                            placeholder="Enter OTP"
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                            className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500"
-                        />
+                {/* Glow background */}
+                <GlowBG firstColor="bg-green-500/20" secondColor="bg-blue-500/20" />
 
-                        <input
-                            type="password"
-                            placeholder="New Password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500"
-                        />
+                <div className="relative z-10 flex min-h-screen">
 
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-1.5 rounded-xl"
-                        >
-                            {loading ? "Verifying..." : "Reset Password"}
+                    {/* LEFT SIDE */}
+                    <div className="hidden lg:flex w-1/2 flex-col justify-center px-20">
 
-                        </button>
-                    </form>
-                </div>
+                        <h1 className="text-6xl font-bold text-white">
+                            <span className="text-green-500">InstiFlow</span>
+                        </h1>
 
-                {/* RESEND TIMER */}
-                <div className="text-center mt-2">
-                    {timer > 0 ? (
-                        <p className="text-gray-400 dark:text-black text-sm">
-                            Resend OTP in {timer}s
+                        <p className="mt-6 text-xl text-gray-300 leading-9 max-w-xl">
+                            Securely verify your identity and reset your password.
+                            We use OTP-based authentication to keep your account safe.
                         </p>
-                    ) : (
-                        <button
-                            onClick={handleResendOtp}
-                            className="
-                                text-blue-400
-                                hover:underline
-                                text-sm
-                            "
-                        >
-                            Resend OTP
-                        </button>
-                    )}
-                </div>
 
-                {/* TOAST */}
-                {message && (
-                    <div className={`
-                        mt-2 text-center text-sm
-                        ${success ? " text-green-600" : " text-red-500"}
-                    `}>
-                        {message}
+                        <div className="mt-10 space-y-4 text-gray-300">
+
+                            <div className="flex items-center gap-3">
+                                <FaCheckCircle className="text-green-400" />
+                                Secure OTP Verification
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <FaCheckCircle className="text-green-400" />
+                                Instant Password Reset
+                            </div>
+
+                            <div className="flex items-center gap-3">
+                                <FaCheckCircle className="text-green-400" />
+                                End-to-End Security
+                            </div>
+
+                        </div>
+
                     </div>
-                )}
 
-                {/* {message && (
-                        <p className="text-center text-sm text-gray-300 dark:text-black mt-4">
-                            {message}
-                        </p>
-                    )} */}
+                    {/* RIGHT SIDE */}
+                    <div className="flex flex-1 items-center justify-center px-6">
+
+                        <div className="w-full max-w-md rounded-3xl border border-gray-700 bg-gray-800/90 backdrop-blur-xl p-8 pt-6 shadow-2xl">
+
+                            {/* Header */}
+                            <div className="text-center mb-8">
+
+                                <h2 className="text-3xl font-bold text-green-500">
+                                    Verify OTP
+                                </h2>
+
+                                <p className="mt-3 text-gray-400">
+                                    Enter OTP & set your new password
+                                </p>
+
+                            </div>
+
+                            <form onSubmit={handleSubmit} className="space-y-3">
+
+                                {/* OTP */}
+                                <div className="relative">
+                                    <FaKey className="absolute left-4 top-4 text-gray-400" />
+                                    <input
+                                        type="text"
+                                        placeholder="Enter OTP"
+                                        value={otp}
+                                        onChange={(e) => setOtp(e.target.value)}
+                                        className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-green-500 focus:ring-2 focus:ring-green-500"
+                                    />
+                                </div>
+
+                                {/* NEW PASSWORD */}
+                                <div className="relative">
+                                    <FaLock className="absolute left-4 top-4 text-gray-400" />
+                                    <input
+                                        type="password"
+                                        placeholder="New Password"
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-green-500 focus:ring-2 focus:ring-green-500"
+                                    />
+                                </div>
+
+                                {/* BUTTON */}
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full rounded-xl bg-green-600 py-3 font-semibold text-white transition hover:bg-green-700 hover:shadow-lg hover:shadow-green-500/30"
+                                >
+                                    {loading ? "Verifying..." : "Reset Password"}
+                                </button>
+
+                            </form>
+
+                            {/* RESEND SECTION */}
+                            <div className="mt-6 text-center">
+
+                                {timer > 0 ? (
+                                    <p className="text-gray-400 text-sm">
+                                        Resend OTP in{" "}
+                                        <span className="text-green-400 font-semibold">
+                                            {timer}s
+                                        </span>
+                                    </p>
+                                ) : (
+                                    <button
+                                        onClick={handleResendOtp}
+                                        className="inline-flex items-center gap-2 text-green-400 hover:underline text-sm"
+                                    >
+                                        <FaRedo />
+                                        Resend OTP
+                                    </button>
+                                )}
+
+                            </div>
+
+                            {/* MESSAGE */}
+                            {message && (
+                                <div
+                                    className={`mt-4 text-center text-sm font-medium ${success ? "text-green-400" : "text-red-400"
+                                        }`}
+                                >
+                                    {message}
+                                </div>
+                            )}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-        </div>
+        </>
     );
 }

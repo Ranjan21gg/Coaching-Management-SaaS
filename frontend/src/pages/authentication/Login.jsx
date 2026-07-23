@@ -1,6 +1,13 @@
 import { useState } from "react";
 import publicAPI from "../../publicapi";
+import GlowBG from "../../components/backgroundglow/GlowBG";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  FaUniversity,
+  FaUser,
+  FaLock,
+  FaCheckCircle,
+} from "react-icons/fa";
 
 export default function Login() {
   const [data, setData] = useState({
@@ -73,76 +80,194 @@ export default function Login() {
 
   return (
     <>
-      <div className="h-full flex items-center justify-center px-4 bg-gray-900 dark:bg-blue-200">
-        <div className="w-full max-w-sm bg-gray-800 dark:bg-white p-8 py-4 rounded-2xl shadow-lg border border-gray-700">
-          
-          {/* Header */}
-          <div className="text-center mb-4">
-            <h1 className="text-2xl font-semibold text-white dark:text-black tracking-wide">
-              Login
+      <div className="relative min-h-screen overflow-hidden bg-gray-900 dark:bg-blue-200">
+
+        {/* Background Glow */}
+        <GlowBG />
+
+        <div className="relative z-10 flex min-h-screen">
+
+          {/* LEFT SECTION */}
+          <div className="hidden lg:flex w-1/2 flex-col justify-center px-20">
+
+            <h1 className="text-6xl font-bold text-white">
+              <span className="text-blue-500">InstiFlow</span>
             </h1>
-            <p className="text-gray-400 dark:text-black text-xs mt-1">
-              Welcome back, please login
+
+            <p className="mt-6 text-xl text-gray-300 leading-9 max-w-xl">
+              Manage your coaching institute with one powerful platform.
+              Keep track of students, attendance, fee payments and analytics
+              effortlessly.
             </p>
-          </div>
 
-          {/* Form */}
-          <div className="space-y-3">
-            <form
-              onSubmit={login}
-              className="space-y-3"
-            >
+            <div className="mt-12 space-y-5">
 
-              <input
-                type="text"
-                placeholder="Institute Name"
-                autoComplete="current-institute_name"
-                className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onChange={(e) => setData({ ...data, institute_name: e.target.value })}
-              />
-
-
-              <input
-                type="text"
-                placeholder="Username"
-                autoComplete="current-username"
-                className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onChange={(e) => setData({ ...data, username: e.target.value })}
-              />
-
-              <input
-                type="password"
-                placeholder="Password"
-                autoComplete="current-password"
-                className="w-full bg-gray-700 dark:bg-white text-white dark:text-black placeholder-gray-400 border border-gray-600 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                onChange={(e) => setData({ ...data, password: e.target.value })}
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl shadow transition duration-300"
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-
-              <div className="text-left text-blue-500">
-                <Link className="text-sm hover:underline" to="/forgot-password">Forgot password?</Link>
-                <div className="text-left text-blue-500">
-                  <p className="text-gray-500 text-sm flex gap-1">Don't have an account?
-                    <Link className="text-blue-500 cursor-pointer hover:underline" to="/register">Sign up</Link>
-                  </p>
-                </div>
+              <div className="flex items-center gap-4 text-lg text-gray-300">
+                <FaCheckCircle className="text-green-400" />
+                Student Management
               </div>
 
-              {message && (
-                <p className={`text-center text-xs font-medium ${isError ? "text-red-400" : "text-green-400"}`}>
-                  {message}
+              <div className="flex items-center gap-4 text-lg text-gray-300">
+                <FaCheckCircle className="text-green-400" />
+                Attendance Tracking
+              </div>
+
+              <div className="flex items-center gap-4 text-lg text-gray-300">
+                <FaCheckCircle className="text-green-400" />
+                Fee Management
+              </div>
+
+              <div className="flex items-center gap-4 text-lg text-gray-300">
+                <FaCheckCircle className="text-green-400" />
+                Dashboard Analytics
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          {/* RIGHT SECTION */}
+          <div className="flex flex-1 items-center justify-center px-6">
+
+            <div className="w-full max-w-md rounded-3xl border border-gray-700 bg-gray-800/90 p-8 pt-4 shadow-2xl">
+
+              {/* Logo */}
+              <div className="text-center mb-3">
+
+                <h2 className="text-3xl font-bold text-blue-500">
+                  Login
+                </h2>
+
+                <p className="mt-3 text-gray-400">
+                  Welcome back 👋
                 </p>
-              )}
-            </form>
+
+                <p className="text-sm text-gray-500 mt-1">
+                  Login to continue managing your institute.
+                </p>
+
+              </div>
+
+              <form
+                onSubmit={login}
+                className="space-y-3"
+              >
+
+                {/* Institute */}
+
+                <div className="relative">
+
+                  <FaUniversity className="absolute left-4 top-4 text-gray-400" />
+
+                  <input
+                    type="text"
+                    placeholder="Institute Name"
+                    autoComplete="current-institute_name"
+                    className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        institute_name: e.target.value,
+                      })
+                    }
+                  />
+
+                </div>
+
+                {/* Username */}
+
+                <div className="relative">
+
+                  <FaUser className="absolute left-4 top-4 text-gray-400" />
+
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    autoComplete="current-username"
+                    className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        username: e.target.value,
+                      })
+                    }
+                  />
+
+                </div>
+
+                {/* Password */}
+
+                <div className="relative">
+
+                  <FaLock className="absolute left-4 top-4 text-gray-400" />
+
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    autoComplete="current-password"
+                    className="w-full rounded-xl border border-gray-600 bg-gray-700 py-3 pl-12 pr-4 text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) =>
+                      setData({
+                        ...data,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+
+                </div>
+
+                {/* Button */}
+
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30"
+                >
+                  {loading ? "Logging in..." : "Login"}
+                </button>
+
+                {/* Links */}
+
+                <div className="flex justify-between text-sm">
+
+                  <Link
+                    to="/forgot-password"
+                    className="text-blue-400 hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+
+                  <Link
+                    to="/register"
+                    className="text-blue-400 hover:underline"
+                  >
+                    Create account
+                  </Link>
+
+                </div>
+
+                {/* Message */}
+
+                {message && (
+                  <p
+                    className={`text-center text-sm font-medium ${isError
+                      ? "text-red-400"
+                      : "text-green-400"
+                      }`}
+                  >
+                    {message}
+                  </p>
+                )}
+
+              </form>
+
+            </div>
+
           </div>
 
         </div>
+
       </div>
     </>
   );

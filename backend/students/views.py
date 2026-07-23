@@ -21,7 +21,7 @@ class StudentViewSet(ModelViewSet):
     def get_queryset(self):
         return Student.objects.filter(
             institute_id=self.request.institute_id
-        )
+        ).order_by("-created_at")
 
     def perform_create(self, serializer):
         serializer.save(
