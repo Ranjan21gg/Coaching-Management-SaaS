@@ -32,7 +32,7 @@ export default function Register() {
     try {
       await publicAPI.post("/register/", data);
       setMessage("Registration successful");
-      setisError(true)
+      setisError(false)
 
       setTimeout(() => {
         navigate("/login");
@@ -40,7 +40,7 @@ export default function Register() {
 
     } catch {
       setMessage("Registration failed");
-      setisError(false)
+      setisError(true)
     }
     setLoading(false);
   };
