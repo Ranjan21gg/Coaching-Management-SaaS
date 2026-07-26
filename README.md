@@ -33,7 +33,7 @@ The login flow uses **JWT authentication with HTTP-only cookies** for enhanced s
 ## 📊 Dashboard
 
 <p align="center">
-  <img src="assets/gifs/dashboard.gif" alt="Dashboard Demo" width="900">
+  <img src="assets/gifs/Dashboard.gif" alt="Dashboard Demo" width="900">
 </p>
 
 The dashboard provides administrators with a centralized overview of institute operations.
