@@ -11,7 +11,7 @@ import {
   FaExclamationTriangle,
   FaArrowRight,
 } from "react-icons/fa";
-import { filterAttendance } from "../components/attendance/AttendanceFilters";
+import { todayAttendancePercentage, todayPresentCount } from "../components/attendance/AttendanceFilters";
 
 
 export default function Dashboard() {
@@ -46,6 +46,7 @@ export default function Dashboard() {
     0
   );
 
+
   return (
     <div className="min-h-screen bg-gray-900 dark:bg-blue-200
      text-white dark:text-black relative overflow-hidden">
@@ -58,7 +59,7 @@ export default function Dashboard() {
         <Header
           Title={"Dashboard"}
           Description={"Welcome back! Here's what's happening in your institute today."}
-          Records={`Present : ${filterAttendance.length} / ${students.length}`}
+          Records={`Present : ${todayPresentCount(attendance)} / ${students.length} - ${todayAttendancePercentage(attendance,students.length)}%`}
         />
 
 

@@ -11,7 +11,7 @@ export function filterAttendance(
         const student = students.find(s => s.id === item.student);
 
         const studentName = student?.name.toLowerCase() || "";
-        
+
         const attendanceDate = new Date(item.date);
         const today = new Date();
 
@@ -93,3 +93,35 @@ export function filterAttendance(
 
     });
 }
+
+
+
+// present count for today
+export function todayPresentCount(attendance) {
+    const today = new Date().toISOString().split("T")[0];
+
+    return attendance.filter((record) =>
+        record.present &&
+        record.date.slice(0, 10) === today
+    ).length;
+};
+
+// absent count for today
+export const todayAbsentCount = (attendance) => {
+  const today = new Date().toISOString().split("T")[0];
+
+  return attendance.filter(
+    (record) =>
+      !record.present &&
+      record.created_at.slice(0, 10) === today
+  ).length;
+};
+
+// attendance percentage for today
+export const todayAttendancePercentage = (attendance, totalStudents) => {
+  if (!totalStudents) return 0;
+
+  const present = todayPresentCount(attendance);
+
+  return Math.round((present / totalStudents) * 100);
+};

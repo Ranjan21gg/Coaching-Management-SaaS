@@ -11,6 +11,7 @@ import AttendanceTable from "../components/attendance/AttendanceTable";
 import AttendanceModal from "../components/attendance/AttendanceModal";
 import DateFilterModal from "../components/attendance/DateFilterModal";
 import { filterAttendance } from "../components/attendance/AttendanceFilters";
+import { todayPresentCount } from "../components/attendance/AttendanceFilters";
 // Services
 import {
   getAttendance,
@@ -203,6 +204,8 @@ export default function Attendance() {
     }
   };
 
+  const getTodayPresentCount = todayPresentCount(attendance);
+
   return (
     <div className="min-h-screen bg-gray-900 dark:bg-blue-200
      text-white dark:text-black relative overflow-hidden">
@@ -216,7 +219,7 @@ export default function Attendance() {
         <Header
           Title={"Attendance Management"}
           Description={"Track & Manage Attendance from one place."}
-          Records={`${filterAttendance.length} / ${students.length}`}
+          Records={`${todayPresentCount(attendance)} / ${students.length}`}
         />
 
         {/* Start Card */}

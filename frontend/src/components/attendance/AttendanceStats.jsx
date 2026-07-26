@@ -1,5 +1,6 @@
 import { FaUserGraduate, FaCheckCircle, FaTimesCircle, FaChartPie } from "react-icons/fa";
 import StatCard from "../card/StartCard";
+import { todayAbsentCount, todayAttendancePercentage, todayPresentCount } from "./AttendanceFilters";
 
 export default function AttendanceStats({ students, attendance }) {
 
@@ -24,7 +25,7 @@ export default function AttendanceStats({ students, attendance }) {
 
             <StatCard
                 title="Present"
-                value={present}
+                value={todayPresentCount(attendance)}
                 description="Present today"
                 icon={<FaCheckCircle />}
                 iconColor="bg-green-500"
@@ -32,7 +33,7 @@ export default function AttendanceStats({ students, attendance }) {
 
             <StatCard
                 title="Absent"
-                value={absent}
+                value={todayAbsentCount(attendance)}
                 description="Absent today"
                 icon={<FaTimesCircle />}
                 iconColor="bg-red-500"
@@ -40,7 +41,7 @@ export default function AttendanceStats({ students, attendance }) {
 
             <StatCard
                 title="Attendance %"
-                value={`${percentage}%`}
+                value={`${todayAttendancePercentage(attendance,students.length)}%`}
                 description="Today's attendance"
                 icon={<FaChartPie />}
                 iconColor="bg-purple-500"
